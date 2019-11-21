@@ -31,7 +31,7 @@ export default {
         .then(res => {
           const { token } = res.data;
           this.$session.set("mmr-token", token); // 세션에 저장
-          this.$store.dispatch("login", token); // vuex token에 저장
+          this.$store.dispatch("setTokenAction", token); // vuex token에 저장
 
           this.$router.push("/"); // 홈에 보내기
         })
