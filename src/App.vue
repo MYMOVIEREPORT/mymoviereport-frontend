@@ -3,6 +3,7 @@
     <nav id="nav">
       <router-link to="/">Home</router-link>
       <router-link to="/login">Login</router-link>
+      <router-link to="/signup">Signup</router-link>
     </nav>
     <div class="container my-3">
       <router-view />
@@ -22,5 +23,13 @@ nav > a {
 }
 nav > a:hover {
   text-decoration: none;
+}
+.vue-auth-form {
+  border: 1px solid rgba(128, 128, 128, 0.342);
+  border-radius: 5px;
+  padding: 3rem;
+}
+.btn {
+  width: 100%;
 }
 </style>

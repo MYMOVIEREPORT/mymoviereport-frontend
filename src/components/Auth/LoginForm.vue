@@ -1,5 +1,5 @@
 <template>
-  <form class="vue-login-form">
+  <form class="vue-auth-form">
     <div class="text-center mb-3">로고하나 추가하시고</div>
     <div class="form-group">
       <input class="form-control" type="text" v-model="credential.username" placeholder="사용자 이름" />
@@ -30,13 +30,5 @@ export default {
 };
 </script>
 
-<style scoped>
-.vue-login-form {
-  border: 1px solid rgba(128, 128, 128, 0.342);
-  border-radius: 5px;
-  padding: 3rem;
-}
-.btn {
-  width: 100%;
-}
+<style>
 </style>
