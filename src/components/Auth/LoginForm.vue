@@ -7,6 +7,7 @@
     <div class="form-group">
       <input class="form-control" type="password" v-model="credential.password" placeholder="비밀번호" />
     </div>
+    <p v-if="errorMessage.length > 0" class="text-center" style="color:red">{{errorMessage}}</p>
     <button @click="login" class="btn btn-primary">로그인</button>
   </form>
 </template>
@@ -20,7 +21,8 @@ export default {
       credential: {
         username: "",
         password: ""
-      }
+      },
+      errorMessage: ""
     };
   },
   methods: {
@@ -35,7 +37,12 @@ export default {
 
           this.$router.push("/"); // 홈에 보내기
         })
-        .catch(err => console.log(err));
+        .catch(() => {
+          this.loginAlert();
+        });
+    },
+    loginAlert() {
+      this.errorMessage = "아이디 또는 비밀번호가 올바르지 않습니다.";
     }
   }
 };
