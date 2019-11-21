@@ -54,11 +54,11 @@
     <div class="form-group row">
       <label class="col-sm-4 col-form-label" for="age">선호 장르</label>
       <div class="col-sm-8">
-        <input type="checkbox" id="jack" value="1" v-model="credential.genre_prefer" />
+        <input type="checkbox" value="1" v-model="credential.genre_prefer" />
         <label for="jack">드라마</label>
-        <input type="checkbox" id="john" value="2" v-model="credential.genre_prefer" />
+        <input type="checkbox" value="2" v-model="credential.genre_prefer" />
         <label for="john">로맨스</label>
-        <input type="checkbox" id="mike" value="3" v-model="credential.genre_prefer" />
+        <input type="checkbox" value="3" v-model="credential.genre_prefer" />
         <label for="mike">공포</label>
       </div>
     </div>

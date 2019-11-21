@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "LoginForm",
   data() {
@@ -24,7 +25,17 @@ export default {
   },
   methods: {
     login() {
-      console.log("로그인 요청");
+      const requestUrl = "http://localhost:8000";
+      axios
+        .post(`${requestUrl}/api-token-auth/`, this.credential)
+        .then(res => {
+          const { token } = res.data;
+          this.$session.set("mmr-token", token); // 세션에 저장
+          this.$store.dispatch("login", token); // vuex token에 저장
+
+          this.$router.push("/"); // 홈에 보내기
+        })
+        .catch(err => console.log(err));
     }
   }
 };
