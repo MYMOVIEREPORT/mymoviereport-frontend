@@ -1,7 +1,20 @@
 import jwtDecode from 'jwt-decode';
 
+const isToken = () => {
+	const storage = sessionStorage.getItem('vue-session-key');
+	if (storage) {
+		const isToken = JSON.parse(storage).hasOwnProperty('mmr-token');
+		if (isToken) {
+			return true;
+		}
+	}
+	return false;
+};
+
 const state = {
-	token: null,
+	token: isToken()
+		? JSON.parse(sessionStorage.getItem('vue-session-key'))['mmr-token']
+		: null,
 };
 
 const mutations = {

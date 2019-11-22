@@ -2,8 +2,8 @@
   <div id="app">
     <nav id="nav">
       <router-link to="/">Home</router-link>
-      <div v-if="isLoggedIn">
-        <h5>{{ loggedInUser.username }}님 안녕하세요.</h5>
+      <div v-if="isAuthenticated">
+        <h5>{{ userName }}님 안녕하세요.</h5>
         <router-link to="/mypage">MyPage</router-link>
         <a @click.prevent="logout">로그아웃</a>
       </div>
@@ -29,20 +29,18 @@ export default {
     }
   },
   computed: {
-    isLoggedIn() {
+    isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     },
-    loggedInUser() {
-      return this.$store.getters.loggedInUser;
+    userName() {
+      return this.$store.getters.loggedInUser.username;
     }
   },
   mounted() {
-    // 만약 토큰이 이미 존재한다면 마운트될때 확인.
-    const token = this.$session.get("mmr-token");
-    if (token) {
-      this.$store.dispatch("setTokenAction", token);
-      // 토큰이 유효한가 ?
-    }
+    // const token = this.$session.get("mmr-token");
+    // if (token) {
+    //   this.$store.dispatch("setTokenAction", token);
+    // }
   }
 };
 </script>
