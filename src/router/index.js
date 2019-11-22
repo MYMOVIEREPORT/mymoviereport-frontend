@@ -5,6 +5,8 @@ import Login from '../views/Login.vue';
 import Signup from '../views/Signup.vue';
 import MyPage from '../views/MyPage.vue';
 import PostDetail from '../views/PostDetail.vue';
+import Movies from '../views/Movies.vue';
+import MovieDetail from '../views/MovieDetail.vue';
 
 Vue.use(VueRouter);
 
@@ -30,9 +32,20 @@ const routes = [
 		component: MyPage,
 	},
 	{
+		path: '/movies',
+		name: 'movies',
+		component: Movies,
+	},
+	{
 		path: '/post/:postId',
 		name: 'post',
 		component: PostDetail,
+		props: true, // 해당 컴포넌트에서 params를 prop으로 사용 가능하게 한다.
+	},
+	{
+		path: '/movie/:movieId',
+		name: 'movie',
+		component: MovieDetail,
 		props: true,
 	},
 ];

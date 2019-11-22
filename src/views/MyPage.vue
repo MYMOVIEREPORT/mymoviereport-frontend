@@ -2,7 +2,7 @@
   <div>
     <h5>유저 페이지</h5>
     <!-- db 버튼. 위험함 -->
-    <button v-if="user.username === 'admin'" @click="putDB">금지버튼</button>
+    <button @click="putDB">금지버튼</button>
     <h5>유저 기본 프로필</h5>
     <hr />
     <UserProfile :user="user" />
@@ -59,7 +59,6 @@ export default {
         .get(`${reqUrl}/api/v1/user/${this.userId}/posts/`, this.requestHeader)
         .then(res => {
           const { data } = res;
-          console.log(data);
           this.posts = data;
         })
         .catch(err => console.log(err));

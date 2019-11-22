@@ -1,10 +1,12 @@
 <template>
   <div id="app">
-    <nav id="nav">
-      <router-link to="/">Home</router-link>
+    <nav id="nav" class="d-flex justify-content-between">
+      <div>
+        <router-link to="/">Home</router-link>
+        <router-link to="/movies">Movies</router-link>
+      </div>
       <div v-if="isAuthenticated">
-        <h5>{{ userName }}님 안녕하세요.</h5>
-        <router-link to="/mypage">MyPage</router-link>
+        <router-link to="/mypage" style="color:blue;font-style:italic;">{{userName}}</router-link>
         <a @click.prevent="logout">로그아웃</a>
       </div>
       <div v-else>
@@ -57,6 +59,7 @@ nav a {
 }
 nav a:hover {
   text-decoration: none;
+  cursor: pointer;
 }
 .vue-auth-form {
   border: 1px solid rgba(128, 128, 128, 0.342);
