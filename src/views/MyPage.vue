@@ -1,6 +1,8 @@
 <template>
   <div>
     <h5>유저 페이지</h5>
+    <!-- db 버튼. 위험함 -->
+    <button v-if="user.username === 'admin'" @click="putDB">금지버튼</button>
     <h5>유저 기본 프로필</h5>
     <hr />
     <UserProfile :user="user" />
@@ -35,6 +37,12 @@ export default {
     }
   },
   methods: {
+    putDB() {
+      axios
+        .put("http://localhost:8000/api/v1/update/db/", {}, this.requestHeader)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    },
     getLoginUser(reqUrl) {
       axios
         .get(`${reqUrl}/api/v1/user/${this.userId}/`, this.requestHeader)
