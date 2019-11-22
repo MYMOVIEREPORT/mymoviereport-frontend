@@ -1,16 +1,29 @@
 <template>
   <div>
     <h5>유저 페이지</h5>
+    <h5>유저 기본 프로필</h5>
+    <hr />
+    <UserProfile :user="user" />
+    <h5>유저가 쓴 포스트</h5>
+    <hr />
+    <UserPosts :posts="posts" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import UserProfile from "../components/User/UserProfile";
+import UserPosts from "../components/User/UserPosts";
 export default {
   name: "MyPage",
+  components: {
+    UserProfile,
+    UserPosts
+  },
   data() {
     return {
-      user: null
+      user: null,
+      posts: null
     };
   },
   computed: {
@@ -21,14 +34,33 @@ export default {
       return this.$store.getters.requestHeader;
     }
   },
+  methods: {
+    getLoginUser(reqUrl) {
+      axios
+        .get(`${reqUrl}/api/v1/user/${this.userId}/`, this.requestHeader)
+        .then(res => {
+          const { data } = res;
+          this.user = data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    getLoginUsersPosts(reqUrl) {
+      axios
+        .get(`${reqUrl}/api/v1/user/${this.userId}/posts/`, this.requestHeader)
+        .then(res => {
+          const { data } = res;
+          console.log(data);
+          this.posts = data;
+        })
+        .catch(err => console.log(err));
+    }
+  },
   mounted() {
     const requestUrl = "http://localhost:8000";
-    axios
-      .get(`${requestUrl}/api/v1/user/${this.userId}/`, this.requestHeader)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => console.log(err));
+    this.getLoginUser(requestUrl);
+    this.getLoginUsersPosts(requestUrl);
   },
   created() {
     // 비 로그인시 차단
