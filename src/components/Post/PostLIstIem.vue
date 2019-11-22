@@ -1,5 +1,5 @@
 <template>
-  <div class="post-item">
+  <div class="post-item" @click="goToPostDetail">
     <img :src="post.image" />
     <img :src="post.movie.poster_url" />
     <p class="text-center">{{post.title}}</p>
@@ -13,6 +13,11 @@ export default {
   props: {
     post: {
       type: Object
+    }
+  },
+  methods: {
+    goToPostDetail() {
+      this.$router.push(`/post/${this.post.id}`);
     }
   }
 };

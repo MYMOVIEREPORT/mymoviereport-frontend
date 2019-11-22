@@ -4,6 +4,7 @@ import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import Signup from '../views/Signup.vue';
 import MyPage from '../views/MyPage.vue';
+import PostDetail from '../views/PostDetail.vue';
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,12 @@ const routes = [
 		path: '/mypage',
 		name: 'mypage',
 		component: MyPage,
+	},
+	{
+		path: '/post/:postId',
+		name: 'post',
+		component: PostDetail,
+		props: true,
 	},
 ];
 
