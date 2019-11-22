@@ -4,6 +4,7 @@
       <router-link to="/">Home</router-link>
       <div v-if="isLoggedIn">
         <h5>{{ loggedInUser.username }}님 안녕하세요.</h5>
+        <router-link to="/mypage">MyPage</router-link>
         <a @click.prevent="logout">로그아웃</a>
       </div>
       <div v-else>
