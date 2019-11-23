@@ -6,7 +6,7 @@ import Signup from '../views/Signup.vue';
 import MyPage from '../views/MyPage.vue';
 import PostDetail from '../views/PostDetail.vue';
 import Movies from '../views/Movies.vue';
-import MovieDetail from '../views/MovieDetail.vue';
+import Movie from '../views/Movie.vue';
 
 Vue.use(VueRouter);
 
@@ -45,7 +45,7 @@ const routes = [
 	{
 		path: '/movie/:movieId',
 		name: 'movie',
-		component: MovieDetail,
+		component: Movie,
 		props: true,
 	},
 ];
