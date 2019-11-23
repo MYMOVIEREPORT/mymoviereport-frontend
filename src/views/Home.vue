@@ -3,6 +3,14 @@
     <h3>(공개된)포스트리스트</h3>
     <hr />
     <PostList :posts="posts" />
+    <h3>떠오르는영화</h3>
+    <hr />
+    <h3>랭킹</h3>
+    <hr />
+    <h3>추천영화</h3>
+    <hr />
+    <h3>신작영화</h3>
+    <hr />
   </div>
 </template>
 

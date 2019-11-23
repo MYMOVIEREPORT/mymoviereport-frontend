@@ -102,8 +102,9 @@ export default {
             this.$session.set("mmr-token", token);
             this.$router.push("/");
           })
-          .catch(() => {
+          .catch(err => {
             // 에러메세지 받아오기 가능?
+            console.log(err.response);
             this.errorMessage.usernameError =
               "이미 존재하는 사용자 이름 또는 유효하지 않은 이름입니다.";
           });
