@@ -6,23 +6,18 @@
       <h5>유저 평가들</h5>
       <hr />
       <PostList :posts="moviePosts" />
-      <div v-if="isAuthenticated">
-        <PostForm :movieId="movie.id" />
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 import MovieDetail from "../components/Movie/MovieDetail";
-import PostForm from "../components/Post/PostForm";
 import PostList from "../components/Post/PostList";
 import { mapGetters } from "vuex";
 export default {
   name: "Movie",
   components: {
     MovieDetail,
-    PostForm,
     PostList
   },
   props: {

@@ -1,8 +1,15 @@
 <template>
   <div>
     <!-- 영화 디테일 -->
-    <h1 class="d-inline">{{movie.title_ko}}</h1>
-    <h3 class="text-muted font-italic d-inline">{{movie.title_en ? movie.title_en : '-'}}</h3>
+    <div>
+      <div class="d-flex align-items-center">
+        <h1 class="m-0 mr-2">{{movie.title_ko}}</h1>
+        <PostForm v-if="isAuthenticated" />
+      </div>
+      <div>
+        <h3 class="text-muted font-italic">{{movie.title_en ? movie.title_en : '-'}}</h3>
+      </div>
+    </div>
     <hr />
 
     <div class="row mb-3">
@@ -57,6 +64,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import PostForm from "../Post/PostForm";
 export default {
   name: "MovieDetail",
   data() {
@@ -65,10 +74,11 @@ export default {
         "https://images-na.ssl-images-amazon.com/images/I/41959Ga9RbL._SY550_.jpg"
     };
   },
-  props: {
-    movie: {
-      type: Object
-    }
+  components: {
+    PostForm
+  },
+  computed: {
+    ...mapGetters(["movie", "isAuthenticated"])
   }
 };
 </script>

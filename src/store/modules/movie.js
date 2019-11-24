@@ -7,6 +7,7 @@ const state = {
 
 const mutations = {
 	getMovie(state, movieId) {
+		state.movie = null; // 초기화 후
 		axios
 			.get(`${reqUrl}/api/v1/movie/${movieId}/`)
 			.then(res => {
@@ -20,6 +21,9 @@ const mutations = {
 const actions = {
 	getMovieAction(options, movieId) {
 		options.commit('getMovie', movieId);
+	},
+	initializeMovieAction(options) {
+		options.commit('initializeMovie');
 	},
 };
 
