@@ -1,8 +1,8 @@
 <template>
-  <div @click="goToMovie">
+  <div class="list-item-container" @click="goToMovie">
     <h6>{{movie.title_ko ? movie.title_ko : '-'}}</h6>
     <h6 class="text-muted font-italic">{{movie.title ? movie.title : '-'}}</h6>
-    <img :src="movie.poster_url ?  movie.poster_url: blankImageUrl" style="width:100%" />
+    <img class="movie-poster" :src="movie.poster_url ?  movie.poster_url: blankImageUrl" />
   </div>
 </template>
 
@@ -28,5 +28,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.list-item-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  cursor: pointer;
+}
+.movie-poster {
+  flex-grow: 1;
+  width: 100%;
+  object-fit: cover;
+}
 </style>
