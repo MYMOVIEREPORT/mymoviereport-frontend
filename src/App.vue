@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <header>
+      <router-link to="/">📒 MYMOVIEREPORT</router-link>
+    </header>
     <nav id="nav" class="d-flex justify-content-between">
       <div>
         <router-link to="/">Home</router-link>
@@ -48,16 +51,28 @@ export default {
 </script>
 
 <style>
+header {
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fdcb6e;
+}
+header > a {
+  color: black;
+  font-size: 2rem;
+  font-weight: 400;
+}
 nav {
   padding: 1.5rem;
-  background-color: blanchedalmond;
+  background-color: #ffeaa7;
 }
 nav a {
   color: black;
   font-weight: bold;
   margin-right: 1rem;
 }
-nav a:hover {
+a:hover {
   text-decoration: none;
   cursor: pointer;
 }

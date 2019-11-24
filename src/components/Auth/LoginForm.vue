@@ -29,7 +29,7 @@ export default {
     login() {
       const requestUrl = "http://localhost:8000";
       axios
-        .post(`${requestUrl}/api-token-auth/`, this.credential)
+        .post(`${requestUrl}/auth/login/`, this.credential)
         .then(res => {
           const { token } = res.data;
           this.$session.set("mmr-token", token); // 세션에 저장
