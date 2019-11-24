@@ -20,7 +20,7 @@
         <div class="form-group row">
           <label class="col-sm-4 col-form-label" for="score">평점</label>
           <div class="col-sm-8">
-            <input id="score" class="form-control" type="text" v-model="post.score" />
+            <input id="score" class="form-control" type="number" step="0.1" v-model="post.score" />
           </div>
         </div>
         <div class="form-group row">

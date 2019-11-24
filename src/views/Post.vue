@@ -6,30 +6,22 @@
       </div>
     </div>
     <div v-else>
-      <article>
-        <div>
-          <h4>미니 영화정보</h4>
-          <hr />
-          <img :src="post.movie.poster_url" alt />
-        </div>
-        <div>
-          <h4>내가 쓴 포스트 정보</h4>
-          <hr />
-          <h3>{{post.title}}</h3>
-          <h6>{{post.published ? '공개' : '비공개'}}글입니다.</h6>
-          <h6>내가 준 점수 : {{post.score}}점</h6>
-          <img :src="post.image" alt />
-          <p>{{post.content}}</p>
-        </div>
-      </article>
+      <PostDetail :post="post" />
+      <MovieMiniCard :movie="post.movie" />
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import PostDetail from "../components/Post/PostDetail";
+import MovieMiniCard from "../components/Movie/MovieMiniCard";
 export default {
-  name: "PostDetail",
+  name: "Post",
+  components: {
+    PostDetail,
+    MovieMiniCard
+  },
   props: {
     postId: {
       type: String
@@ -64,7 +56,4 @@ export default {
 </script>
 
 <style>
-img {
-  width: 200px;
-}
 </style>
