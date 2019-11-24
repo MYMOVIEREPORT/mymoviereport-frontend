@@ -1,7 +1,7 @@
 <template>
   <div class="list-item-container" @click="goToMovie">
     <h6>{{movie.title_ko ? movie.title_ko : '-'}}</h6>
-    <h6 class="text-muted font-italic">{{movie.title ? movie.title : '-'}}</h6>
+    <h6 class="text-muted font-italic">{{movie.title_en ? movie.title_en : '-'}}</h6>
     <img class="movie-poster" :src="movie.poster_url ?  movie.poster_url: blankImageUrl" />
   </div>
 </template>

@@ -2,7 +2,7 @@
   <div>
     <!-- 영화 디테일 -->
     <h1 class="d-inline">{{movie.title_ko}}</h1>
-    <h3 class="text-muted font-italic d-inline">{{movie.title ? movie.title : '-'}}</h3>
+    <h3 class="text-muted font-italic d-inline">{{movie.title_en ? movie.title_en : '-'}}</h3>
     <hr />
 
     <div class="row mb-3">
