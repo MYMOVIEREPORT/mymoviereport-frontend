@@ -1,13 +1,13 @@
 <template>
   <div class="row ranking-list-wrapper">
     <div class="col-4">
-      <h4 class="m-0 text-center rank"># {{rank+1}}</h4>
+      <h5 class="m-0 text-center rank"># {{rank+1}}</h5>
     </div>
     <div class="col-8 d-flex align-items-center justify-content-center">
       <div class="mr-3">
         <img :src="ranker.thumbnail ? ranker.thumbnail : blankImageUrl" class="rounded-circle" />
       </div>
-      <h4 class="m-0">{{ranker.username}}</h4>
+      <h5 class="m-0">{{ranker.username}}</h5>
     </div>
   </div>
 </template>
@@ -40,8 +40,8 @@ export default {
   margin-bottom: 1rem;
 }
 img {
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   object-fit: cover;
 }
 </style>

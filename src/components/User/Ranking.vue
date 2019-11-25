@@ -1,5 +1,10 @@
 <template>
   <div>
+    <div>
+      <PrizeIcon />
+      <span>RANKING</span>
+    </div>
+    <hr />
     <RankingList :rankers="rankers" />
   </div>
 </template>
@@ -7,10 +12,12 @@
 <script>
 import axios from "axios";
 import RankingList from "../User/RankingList";
+import PrizeIcon from "../Icon/PrizeIcon";
 export default {
   name: "Ranking",
   components: {
-    RankingList
+    RankingList,
+    PrizeIcon
   },
   data() {
     return {

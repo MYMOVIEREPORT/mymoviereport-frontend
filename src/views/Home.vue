@@ -7,29 +7,30 @@
       <div class="row">
         <div class="col-12 col-md-8">
           <div class="mb-3">
-            <h3 class="division-title">⏳ LATEST REPORT</h3>
-            <div class="division-bar" />
+            <div>
+              <FastTimeIcon />
+              <span>LATEST REPORT</span>
+            </div>
+            <hr />
             <PostList :posts="posts" />
           </div>
         </div>
         <div class="col-12 col-md-4">
-          <h3 class="division-title">랭킹</h3>
-          <div class="division-bar" />
           <Ranking />
         </div>
       </div>
       <div class="mb-3">
-        <h3 class="division-title">🔥 최근 리포트가 활발한 영화</h3>
-        <div class="division-bar" />
+        <h5>🔥 최근 리포트가 활발한 영화</h5>
+        <hr />
         <MovieList :movies="hotMovies" />
       </div>
       <div class="mb-3">
-        <h3 class="division-title">신작영화</h3>
-        <div class="division-bar" />
+        <h5>신작영화</h5>
+        <hr />
         <MovieList :movies="newMovies" />
       </div>
       <div>
-        <h3>테스트중</h3>
+        <div>테스트중</div>
         <MovieListHorizontal :movies="newMovies" />
       </div>
     </div>
@@ -43,6 +44,7 @@ import MovieList from "../components/Movie/MovieList";
 import Ranking from "../components/User/Ranking";
 import MovieCarousel from "../components/Movie/MovieCarousel";
 import MovieListHorizontal from "../components/Movie/MovieListHorizontal";
+import FastTimeIcon from "../components/Icon/FastTimeIcon";
 import axios from "axios";
 export default {
   name: "home",
@@ -51,7 +53,8 @@ export default {
     MovieList,
     Ranking,
     MovieCarousel,
-    MovieListHorizontal
+    MovieListHorizontal,
+    FastTimeIcon
   },
   data() {
     return {
@@ -105,10 +108,6 @@ export default {
 </script>
 
 <style scoped>
-.division-title {
-  padding: 1rem 1rem 0.5rem 1rem;
-}
-
 .division-bar {
   border-bottom: 3px solid #596275;
   margin-bottom: 1rem;
