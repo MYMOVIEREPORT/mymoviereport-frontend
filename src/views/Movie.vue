@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container pt-5">
     <div v-if="!movie">loading..</div>
     <div v-else>
       <MovieDetail :movie="movie" />

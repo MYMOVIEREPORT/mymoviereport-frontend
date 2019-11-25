@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div>
-      <PrizeIcon />
-      <span>RANKING</span>
+    <div class="d-flex align-items-center">
+      <PrizeIcon fill="#fdcb6e" />
+      <span class="ml-2">RANKING</span>
     </div>
-    <hr />
+    <hr class="dark-br" />
     <RankingList :rankers="rankers" />
   </div>
 </template>

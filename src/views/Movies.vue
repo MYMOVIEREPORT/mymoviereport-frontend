@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container pt-5">
     <h4>영화 뷰</h4>
     <MovieList :movies="movies" />
   </div>

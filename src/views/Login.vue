@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container pt-5">
     <h4 class="text-center font-weight-bold mb-3">로그인</h4>
     <LoginForm />
   </div>

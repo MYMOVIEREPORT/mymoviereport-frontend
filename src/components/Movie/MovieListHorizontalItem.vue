@@ -3,11 +3,13 @@
     <div class="movie-poster">
       <img :src="movie.poster_url ?  movie.poster_url: blankImageUrl" />
     </div>
-    <div v-show="contentShow" class="movie-item-content">
-      <div id="title">{{movie.title_ko ? movie.title_ko : '-'}}</div>
-      <div id="title-en">{{movie.title_en ? movie.title_en : '-'}}</div>
-      <div class="my-3">⭐️ {{movie.score}}</div>
-    </div>
+    <!-- <div v-show="contentShow" class="movie-item-content">
+      <div class="contents">
+        <div id="title">{{movie.title_ko ? movie.title_ko : '-'}}</div>
+        <div id="title-en">{{movie.title_en ? movie.title_en : '-'}}</div>
+        <div class="my-3">⭐️ {{movie.score}}</div>
+      </div>
+    </div>-->
   </div>
 </template>
 
@@ -68,10 +70,13 @@ export default {
 
 .movie-item-content {
   position: absolute;
+  width: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
 
+.contents {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -81,7 +86,7 @@ export default {
 .active {
   transform: scale(1.1);
   transition: all ease 1.3s;
-  opacity: 0.3;
+  /* opacity: 0.3; */
 }
 
 #title {

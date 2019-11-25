@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container pt-5">
     <UserProfile :user="user" />
     <h5>유저가 쓴 포스트</h5>
     <hr />

@@ -3,35 +3,43 @@
     <div>
       <MovieCarousel :movies="hotMovies" />
     </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-md-8">
-          <div class="mb-3">
-            <div>
-              <FastTimeIcon />
-              <span>LATEST REPORT</span>
-            </div>
-            <hr />
-            <PostList :posts="posts" />
-          </div>
-        </div>
-        <div class="col-12 col-md-4">
-          <Ranking />
-        </div>
-      </div>
-      <div class="mb-3">
-        <h5>🔥 최근 리포트가 활발한 영화</h5>
-        <hr />
-        <MovieList :movies="hotMovies" />
-      </div>
-      <div class="mb-3">
+    <!-- 최신영화 -->
+    <div>
+      <div class="container mb-0">
         <h5>신작영화</h5>
         <hr />
-        <MovieList :movies="newMovies" />
       </div>
-      <div>
-        <div>테스트중</div>
+      <div class="m-3">
         <MovieListHorizontal :movies="newMovies" />
+        <!-- <MovieList :movies="newMovies" /> -->
+      </div>
+    </div>
+    <div>
+      <div class="container mb-0">
+        <h5>🔥 최근 리포트가 활발한 영화</h5>
+        <hr />
+      </div>
+      <div class="m-3">
+        <MovieListHorizontal :movies="hotMovies" />
+      </div>
+    </div>
+    <div class="etc dark-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-8">
+            <div class="mb-3">
+              <div class="d-flex align-items-center">
+                <FastTimeIcon fill="#e17055" />
+                <span class="ml-2">LATEST REPORT</span>
+              </div>
+              <hr class="dark-br" />
+              <PostList :posts="posts" />
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <Ranking />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -40,7 +48,7 @@
 <script>
 // @ is an alias to /src
 import PostList from "../components/Post/PostList";
-import MovieList from "../components/Movie/MovieList";
+// import MovieList from "../components/Movie/MovieList";
 import Ranking from "../components/User/Ranking";
 import MovieCarousel from "../components/Movie/MovieCarousel";
 import MovieListHorizontal from "../components/Movie/MovieListHorizontal";
@@ -50,7 +58,7 @@ export default {
   name: "home",
   components: {
     PostList,
-    MovieList,
+    // MovieList,
     Ranking,
     MovieCarousel,
     MovieListHorizontal,
@@ -107,9 +115,17 @@ export default {
 };
 </script>
 
-<style scoped>
-.division-bar {
-  border-bottom: 3px solid #596275;
-  margin-bottom: 1rem;
+<style>
+.dark-bg {
+  color: white;
+}
+
+.dark-br {
+  border-top: 1px solid white;
+}
+
+.etc {
+  padding: 1rem 0;
+  background-color: #121212;
 }
 </style>

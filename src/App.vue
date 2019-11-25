@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <nav id="nav" class="d-flex align-items-center">
-      <span class="logo">MMR</span>
+    <!-- 네비 -->
+    <nav id="nav navbar-expadn-lg" class="d-flex align-items-center">
+      <router-link to="/" class="logo">MMR</router-link>
       <div class="router">
         <div>
           <router-link to="/">Home</router-link>
@@ -20,6 +21,11 @@
 
     <!-- 라우터 뷰 -->
     <router-view />
+
+    <!-- 푸터 -->
+    <footer class="footer">
+      <div>© MY MOVIE REPORT - 띵한만다린, {{new Date().getFullYear()}}</div>
+    </footer>
   </div>
 </template>
 
@@ -41,43 +47,31 @@ export default {
       return this.$store.getters.loggedInUser.username;
     }
   }
-  // created() {
-  //   window.addEventListener("scroll", this.onScroll);
-  // },
-  // destroyed() {
-  //   window.removeEventListener("scroll", this.onScroll);
-  // }
 };
 </script>
 
 <style>
 nav {
   padding: 0 2rem;
-  background-color: rgb(20, 20, 20);
+  background-color: transparent;
   height: 4rem;
   background-image: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.7) 10%,
+    rgba(0, 0, 0, 0.9) 10%,
     rgba(0, 0, 0, 0)
   );
   width: 100%;
-  position: relative;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+
+.scroll {
+  background-color: rgb(20, 20, 20);
 }
 
 .container {
   margin: 2rem auto;
-}
-
-.scroll {
-  position: fixed;
-  z-index: 1;
-  background-color: transparent;
-}
-
-.router a {
-  color: #e5e5e5;
-  font-weight: bold;
-  margin-right: 1rem;
 }
 
 .router {
@@ -87,15 +81,24 @@ nav {
   align-items: center;
 }
 
+.router a {
+  color: #e5e5e5;
+  font-weight: bold;
+  margin-right: 1rem;
+  text-decoration: none;
+}
+
 a:hover {
   text-decoration: none;
   cursor: pointer;
 }
+
 .vue-auth-form {
   border: 1px solid rgba(128, 128, 128, 0.342);
   border-radius: 5px;
   padding: 3rem;
 }
+
 .btn {
   width: 100%;
 }
@@ -105,5 +108,24 @@ a:hover {
   font-weight: bold;
   font-size: 2rem;
   margin-right: 2rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.logo:hover {
+  text-decoration: none;
+  color: #c44569;
+}
+
+.footer {
+  padding: 1rem;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  bottom: 0;
+}
+.footer div {
+  color: white;
 }
 </style>

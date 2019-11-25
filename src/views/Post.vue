@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container pt-5">
     <div v-if="loading">
       <div class="spinner-border" role="status">
         <span class="sr-only">Loading...</span>
