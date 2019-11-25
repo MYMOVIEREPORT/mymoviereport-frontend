@@ -17,7 +17,7 @@
         <router-link to="/signup">Signup</router-link>
       </div>
     </nav>
-    <div class="container my-3">
+    <div class="container my-3 px-1">
       <router-view />
     </div>
   </div>

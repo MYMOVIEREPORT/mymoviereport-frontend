@@ -58,6 +58,7 @@ export default {
   width: 100%;
   height: 15rem;
   opacity: 0.9;
+  object-fit: cover;
 }
 
 .post-text {
