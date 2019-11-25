@@ -28,6 +28,10 @@
         <div class="division-bar" />
         <MovieList :movies="newMovies" />
       </div>
+      <div>
+        <h3>테스트중</h3>
+        <MovieListHorizontal :movies="newMovies" />
+      </div>
     </div>
   </div>
 </template>
@@ -38,6 +42,7 @@ import PostList from "../components/Post/PostList";
 import MovieList from "../components/Movie/MovieList";
 import Ranking from "../components/User/Ranking";
 import MovieCarousel from "../components/Movie/MovieCarousel";
+import MovieListHorizontal from "../components/Movie/MovieListHorizontal";
 import axios from "axios";
 export default {
   name: "home",
@@ -45,7 +50,8 @@ export default {
     PostList,
     MovieList,
     Ranking,
-    MovieCarousel
+    MovieCarousel,
+    MovieListHorizontal
   },
   data() {
     return {
