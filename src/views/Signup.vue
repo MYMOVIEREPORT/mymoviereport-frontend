@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h4 class="text-center font-weight-bold mb-3">회원가입</h4>
     <SignupForm />
   </div>

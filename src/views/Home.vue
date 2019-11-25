@@ -1,30 +1,35 @@
 <template>
-  <h3>
-    <div class="row">
-      <div class="col-12 col-md-8">
-        <div class="mb-3">
-          <h3 class="division-title">⏳ LATEST REPORT</h3>
+  <div>
+    <div>
+      <MovieCarousel :movies="hotMovies" />
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-8">
+          <div class="mb-3">
+            <h3 class="division-title">⏳ LATEST REPORT</h3>
+            <div class="division-bar" />
+            <PostList :posts="posts" />
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <h3 class="division-title">랭킹</h3>
           <div class="division-bar" />
-          <PostList :posts="posts" />
+          <Ranking />
         </div>
       </div>
-      <div class="col-12 col-md-4">
-        <h3 class="division-title">랭킹</h3>
+      <div class="mb-3">
+        <h3 class="division-title">🔥 최근 리포트가 활발한 영화</h3>
         <div class="division-bar" />
-        <Ranking />
+        <MovieList :movies="hotMovies" />
+      </div>
+      <div class="mb-3">
+        <h3 class="division-title">신작영화</h3>
+        <div class="division-bar" />
+        <MovieList :movies="newMovies" />
       </div>
     </div>
-    <div class="mb-3">
-      <h3 class="division-title">🔥 최근 리포트가 활발한 영화</h3>
-      <div class="division-bar" />
-      <MovieList :movies="hotMovies" />
-    </div>
-    <div class="mb-3">
-      <h3 class="division-title">신작영화</h3>
-      <div class="division-bar" />
-      <MovieList :movies="newMovies" />
-    </div>
-  </h3>
+  </div>
 </template>
 
 <script>
@@ -32,13 +37,15 @@
 import PostList from "../components/Post/PostList";
 import MovieList from "../components/Movie/MovieList";
 import Ranking from "../components/User/Ranking";
+import MovieCarousel from "../components/Movie/MovieCarousel";
 import axios from "axios";
 export default {
   name: "home",
   components: {
     PostList,
     MovieList,
-    Ranking
+    Ranking,
+    MovieCarousel
   },
   data() {
     return {
@@ -51,7 +58,11 @@ export default {
     getPublishedPosts() {
       const reqUrl = "http://localhost:8000";
       axios
-        .get(`${reqUrl}/api/v1/posts/`)
+        .get(`${reqUrl}/api/v1/posts/`, {
+          params: {
+            limit: 6
+          }
+        })
         .then(res => {
           const { data } = res;
           this.posts = data;

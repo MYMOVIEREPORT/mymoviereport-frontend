@@ -1,25 +1,25 @@
 <template>
   <div id="app">
-    <header>
-      <router-link to="/">📒 MYMOVIEREPORT</router-link>
-    </header>
-    <nav id="nav" class="d-flex justify-content-between">
-      <div>
-        <router-link to="/">Home</router-link>
-        <router-link to="/movies">Movies</router-link>
-      </div>
-      <div v-if="isAuthenticated">
-        <router-link to="/mypage" style="color:blue;font-style:italic;">{{userName}}</router-link>
-        <a @click.prevent="logout">로그아웃</a>
-      </div>
-      <div v-else>
-        <router-link to="/login">Login</router-link>
-        <router-link to="/signup">Signup</router-link>
+    <nav id="nav" class="d-flex align-items-center">
+      <span class="logo">MMR</span>
+      <div class="router">
+        <div>
+          <router-link to="/">Home</router-link>
+          <router-link to="/movies">Movies</router-link>
+        </div>
+        <div v-if="isAuthenticated">
+          <router-link to="/mypage">{{userName}}</router-link>
+          <a href="#" @click.prevent="logout">로그아웃</a>
+        </div>
+        <div v-else>
+          <router-link to="/login">Login</router-link>
+          <router-link to="/signup">Signup</router-link>
+        </div>
       </div>
     </nav>
-    <div class="container my-3 px-1">
-      <router-view />
-    </div>
+
+    <!-- 라우터 뷰 -->
+    <router-view />
   </div>
 </template>
 
@@ -40,38 +40,53 @@ export default {
     userName() {
       return this.$store.getters.loggedInUser.username;
     }
-  },
-  mounted() {
-    // const token = this.$session.get("mmr-token");
-    // if (token) {
-    //   this.$store.dispatch("setTokenAction", token);
-    // }
   }
+  // created() {
+  //   window.addEventListener("scroll", this.onScroll);
+  // },
+  // destroyed() {
+  //   window.removeEventListener("scroll", this.onScroll);
+  // }
 };
 </script>
 
 <style>
-header {
-  height: 4rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fdcb6e;
-}
-header > a {
-  color: black;
-  font-size: 2rem;
-  font-weight: 400;
-}
 nav {
-  padding: 1.5rem;
-  background-color: #ffeaa7;
+  padding: 0 2rem;
+  background-color: rgb(20, 20, 20);
+  height: 4rem;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.7) 10%,
+    rgba(0, 0, 0, 0)
+  );
+  width: 100%;
+  position: relative;
 }
-nav a {
-  color: black;
+
+.container {
+  margin: 2rem auto;
+}
+
+.scroll {
+  position: fixed;
+  z-index: 1;
+  background-color: transparent;
+}
+
+.router a {
+  color: #e5e5e5;
   font-weight: bold;
   margin-right: 1rem;
 }
+
+.router {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 a:hover {
   text-decoration: none;
   cursor: pointer;
@@ -83,5 +98,12 @@ a:hover {
 }
 .btn {
   width: 100%;
+}
+
+.logo {
+  color: #c44569;
+  font-weight: bold;
+  font-size: 2rem;
+  margin-right: 2rem;
 }
 </style>
