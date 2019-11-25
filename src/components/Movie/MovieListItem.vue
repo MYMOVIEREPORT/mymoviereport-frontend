@@ -4,8 +4,9 @@
       <img :src="movie.poster_url ?  movie.poster_url: blankImageUrl" />
     </div>
     <div v-show="contentShow" class="movie-item-content">
-      <h5 class="mx-1 font-weight-bold" id="title">{{movie.title_ko ? movie.title_ko : '-'}}</h5>
-      <h6 class="mx-1 font-italic" id="title-en">{{movie.title_en ? movie.title_en : '-'}}</h6>
+      <h5 class="m-0 mx-2 font-weight-bold" id="title">{{movie.title_ko ? movie.title_ko : '-'}}</h5>
+      <h6 class="m-0 mx-2 font-italic" id="title-en">{{movie.title_en ? movie.title_en : '-'}}</h6>
+      <h4 class="my-3">⭐️ {{movie.score}}</h4>
     </div>
   </div>
 </template>
