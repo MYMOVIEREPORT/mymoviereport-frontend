@@ -1,13 +1,10 @@
 <template>
-  <div class="post-wrapper">
-    <div
-      class="post-view"
-      @click="goToPostDetail"
-      @mouseover="showText"
-      @mouseleave="hiddenText"
-      :style="cardStyle"
-    >
-      <h4 v-show="textShow" class="text-center">{{post.title}}</h4>
+  <div class="post-wrapper" @click="goToPostDetail" @mouseover="active" @mouseleave="deactivate">
+    <div class="post-image-wrapper">
+      <img :src="post.image" alt />
+    </div>
+    <div class="post-text" v-show="textShow">
+      <h2 class="m-0">{{post.title}}</h2>
     </div>
   </div>
 </template>
@@ -17,10 +14,7 @@ export default {
   name: "PostListItem",
   data() {
     return {
-      textShow: false,
-      cardStyle: {
-        backgroundImage: `url(${this.post.image})`
-      }
+      textShow: false
     };
   },
   props: {
@@ -32,11 +26,15 @@ export default {
     goToPostDetail() {
       this.$router.push(`/post/${this.post.id}`);
     },
-    showText() {
+    active() {
       this.textShow = true;
+      const imageTag = this.$el.firstChild;
+      imageTag.classList.add("active");
     },
-    hiddenText() {
+    deactivate() {
       this.textShow = false;
+      const imageTag = this.$el.firstChild;
+      imageTag.classList.remove("active");
     }
   }
 };
@@ -45,22 +43,27 @@ export default {
 <style>
 .post-wrapper {
   position: relative;
+  cursor: pointer;
   overflow: hidden;
   border-radius: 3px;
 }
-.post-view {
-  height: 15rem;
-  background-size: cover;
-  background-position: center;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 0 solid #000;
-  overflow: hidden;
-}
-.post-view:hover {
+
+.active {
   transform: scale(1.3);
-  transition: all ease 1.5s;
+  transition: all ease 1s;
+  opacity: 0.3;
+}
+
+.post-image-wrapper img {
+  width: 100%;
+  height: 15rem;
+  opacity: 0.9;
+}
+
+.post-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
