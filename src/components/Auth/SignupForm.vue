@@ -1,12 +1,12 @@
 <template>
   <form class="vue-auth-form">
-    <div class="text-center mb-3">로고하나 추가하시고</div>
+    <h1 class="text-center mb-3">MMR</h1>
 
     <div class="form-group row">
       <label class="col-sm-4 col-form-label" for="username">사용자이름</label>
       <div class="col-sm-8">
         <input id="username" class="form-control" type="text" v-model="credential.username" />
-        <small v-if="errorMessage.usernameError.length > 0">{{errorMessage.usernameError}}</small>
+        <small v-if="error.username">{{error.username}}</small>
       </div>
     </div>
 
@@ -14,9 +14,7 @@
       <label class="col-sm-4 col-form-label" for="pwd">비밀번호</label>
       <div class="col-sm-8">
         <input id="pwd" class="form-control" type="password" v-model="credential.password" />
-        <small
-          v-if="errorMessage.passwordLengthError.length > 0"
-        >{{errorMessage.passwordLengthError}}</small>
+        <small v-if="error.password">{{error.password}}</small>
       </div>
     </div>
 
@@ -29,9 +27,7 @@
           type="password"
           v-model="credential.passwordConfirm"
         />
-        <small
-          v-if="errorMessage.passwordUnmatchError.length > 0"
-        >{{errorMessage.passwordUnmatchError}}</small>
+        <small v-if="error.passwordConfirm">{{error.passwordConfirm}}</small>
       </div>
     </div>
 
@@ -39,7 +35,7 @@
       <label class="col-sm-4 col-form-label" for="email">이메일</label>
       <div class="col-sm-8">
         <input id="email" class="form-control" type="email" v-model="credential.email" />
-        <small v-if="errorMessage.emailError.length > 0">{{errorMessage.emailError}}</small>
+        <small v-if="error.email">{{error.email}}</small>
       </div>
     </div>
 
@@ -54,7 +50,7 @@
           min="1"
           max="200"
         />
-        <small v-if="errorMessage.ageError.length > 0">{{errorMessage.ageError}}</small>
+        <small v-if="error.age">{{error.age}}</small>
       </div>
     </div>
 
@@ -78,20 +74,32 @@ export default {
         thumbnail:
           "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
       },
-      errorMessage: {
-        usernameError: "",
-        passwordUnmatchError: "",
-        passwordLengthError: "",
-        emailError: "",
-        ageError: ""
+      error: {
+        username: "",
+        password: "",
+        passwordConfirm: "",
+        email: "",
+        age: ""
       }
     };
   },
   methods: {
+    validation() {
+      if (this.credential.password !== this.credential.passwordConfirm) {
+        this.error.passwordConfirm = "비밀번호가 동일하지 않습니다.";
+        return false;
+      }
+      return true;
+    },
     signup() {
-      this.errorMessage.usernameError = "";
+      this.error = {
+        username: "",
+        password: "",
+        passwordConfirm: "",
+        email: "",
+        age: ""
+      };
       if (this.validation()) {
-        // 가입 프로세스
         const requestUrl = "http://localhost:8000";
         axios
           .post(`${requestUrl}/auth/signup/`, this.credential)
@@ -103,46 +111,14 @@ export default {
             this.$router.push("/");
           })
           .catch(err => {
-            // 에러메세지 받아오기 가능?
-            console.log(err.response);
-            this.errorMessage.usernameError =
-              "이미 존재하는 사용자 이름 또는 유효하지 않은 이름입니다.";
+            const { data } = err.response;
+            for (let key in data) {
+              if (data.hasOwnProperty(key)) {
+                this.error[key] = data[key][0];
+              }
+            }
           });
       }
-    },
-    validation() {
-      // 초기화 후 다시 메시징
-      this.errorMessage = {
-        usernameError: "",
-        passwordUnmatchError: "",
-        passwordLengthError: "",
-        emailError: "",
-        ageError: ""
-      };
-
-      if (this.credential.password.length < 8) {
-        this.errorMessage.passwordLengthError =
-          "비밀번호는 8자 이상이어야 합니다.";
-        return false;
-      }
-      if (this.credential.password !== this.credential.passwordConfirm) {
-        this.errorMessage.passwordUnmatchError =
-          "비밀번호가 동일하지 않습니다.";
-        return false;
-      }
-      if (!this.credential.email.includes("@")) {
-        this.errorMessage.emailError = "올바르지않은 이메일 형식입니다.";
-        return false;
-      }
-      if (
-        parseInt(this.credential.age) < 1 ||
-        parseInt(this.credential.age) > 200
-      ) {
-        this.errorMessage.ageError = "나이가 올바르지 않습니다.";
-        return false;
-      }
-
-      return true;
     }
   }
 };
