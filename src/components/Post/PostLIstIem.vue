@@ -40,7 +40,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .post-wrapper {
   position: relative;
   cursor: pointer;
@@ -49,7 +49,7 @@ export default {
 }
 
 .active {
-  transform: scale(1.3);
+  transform: scale(1.1);
   transition: all ease 1s;
   opacity: 0.3;
 }
