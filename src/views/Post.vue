@@ -1,29 +1,19 @@
 <template>
   <div class="container pt-5">
-    <div v-if="loading">
-      <div class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-    </div>
-    <div v-else>
-      <!-- <PostDetail :post="post" /> -->
-      <PostDetailModal :post="post" />
-      <!-- <MovieMiniCard :movie="post.movie" /> -->
-    </div>
+    <Loading v-if="loading" />
+    <PostDetailModal v-else :post="post" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import PostDetailModal from "../components/Post/PostDetailModal";
-// import PostDetail from "../components/Post/PostDetail";
-// import MovieMiniCard from "../components/Movie/MovieMiniCard";
+import Loading from "../components/Util/Loading";
 export default {
   name: "Post",
   components: {
-    PostDetailModal
-    // PostDetail,
-    // MovieMiniCard
+    PostDetailModal,
+    Loading
   },
   props: {
     postId: {

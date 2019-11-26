@@ -49,10 +49,8 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-primary" @click="createPost">
-            <span v-if="!requesting">완료</span>
-            <div v-else class="spinner-grow" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
+            <Loading v-if="requesting" />
+            <span>완료</span>
           </button>
         </div>
       </div>
@@ -62,6 +60,7 @@
 
 <script>
 import axios from "axios";
+import Loading from "../Util/Loading";
 import { mapGetters } from "vuex";
 export default {
   name: "PostFormModal",
@@ -77,6 +76,9 @@ export default {
       },
       requesting: false
     };
+  },
+  components: {
+    Loading
   },
   computed: {
     ...mapGetters(["requestHeader", "movie"])

@@ -1,9 +1,11 @@
 <template>
-  <div v-if="size === 'small'" class="spinner-border spinner-border-sm" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-  <div v-else class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
+  <div class="width:100%">
+    <div v-if="size === 'small'" class="spinner-border spinner-border-sm" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div v-else class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
   </div>
 </template>
 

@@ -1,9 +1,7 @@
 <template>
   <div class="container pt-5">
     <h4>검색 :{{keyword}}</h4>
-    <div v-if="loading">
-      <Loading />
-    </div>
+    <Loading v-if="loading" />
     <div v-else>
       <div v-if="result.movies.length === 0" class="text-center">검색 결과가 없습니다.</div>
       <MovieList v-else :movies="result.movies" />
