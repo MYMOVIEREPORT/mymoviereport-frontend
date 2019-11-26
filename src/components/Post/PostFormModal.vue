@@ -113,7 +113,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .modal-content {
   background-color: #bfad83;
   border: none;

@@ -1,21 +1,32 @@
 <template>
-  <div class="post-wrapper" @click="goToPostDetail" @mouseover="active" @mouseleave="deactivate">
+  <div
+    class="post-wrapper"
+    @mouseover="active"
+    @mouseleave="deactivate"
+    data-toggle="modal"
+    :data-target="`#post-${post.id}`"
+  >
     <div class="post-image-wrapper">
       <img :src="post.image" alt />
     </div>
     <div class="post-text" v-show="textShow">
       <h2 class="m-0">{{post.title}}</h2>
     </div>
+    <PostDetailModal :post="post" />
   </div>
 </template>
 
 <script>
+import PostDetailModal from "./PostDetailModal";
 export default {
   name: "PostListItem",
   data() {
     return {
       textShow: false
     };
+  },
+  components: {
+    PostDetailModal
   },
   props: {
     post: {

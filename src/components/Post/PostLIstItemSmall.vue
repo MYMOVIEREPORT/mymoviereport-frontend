@@ -1,5 +1,11 @@
 <template>
-  <div class="post-wrapper" @click="goToPostDetail" @mouseover="active" @mouseleave="deactivate">
+  <div
+    class="post-wrapper"
+    data-toggle="modal"
+    :data-target="`#post-${post.id}`"
+    @mouseover="active"
+    @mouseleave="deactivate"
+  >
     <div class="post-image-wrapper">
       <img :src="post.image" alt />
     </div>
@@ -7,12 +13,17 @@
       <div class="m-0">{{post.title}}</div>
       <div>{{post.score}}점</div>
     </div>
+    <PostDetailModal :post="post" />
   </div>
 </template>
 
 <script>
+import PostDetailModal from "./PostDetailModal";
 export default {
   name: "PostListItemSmall",
+  components: {
+    PostDetailModal
+  },
   data() {
     return {
       textShow: false

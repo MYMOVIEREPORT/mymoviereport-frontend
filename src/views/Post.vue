@@ -6,21 +6,24 @@
       </div>
     </div>
     <div v-else>
-      <PostDetail :post="post" />
-      <MovieMiniCard :movie="post.movie" />
+      <!-- <PostDetail :post="post" /> -->
+      <PostDetailModal :post="post" />
+      <!-- <MovieMiniCard :movie="post.movie" /> -->
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import PostDetail from "../components/Post/PostDetail";
-import MovieMiniCard from "../components/Movie/MovieMiniCard";
+import PostDetailModal from "../components/Post/PostDetailModal";
+// import PostDetail from "../components/Post/PostDetail";
+// import MovieMiniCard from "../components/Movie/MovieMiniCard";
 export default {
   name: "Post",
   components: {
-    PostDetail,
-    MovieMiniCard
+    PostDetailModal
+    // PostDetail,
+    // MovieMiniCard
   },
   props: {
     postId: {
