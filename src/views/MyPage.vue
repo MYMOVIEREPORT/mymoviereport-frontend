@@ -3,7 +3,7 @@
     <UserProfile :user="user" />
     <h5>유저가 쓴 포스트</h5>
     <hr />
-    <UserPosts :posts="posts" />
+    <UserPosts :posts="userPosts" />
   </div>
 </template>
 
@@ -11,6 +11,7 @@
 import axios from "axios";
 import UserProfile from "../components/User/UserProfile";
 import UserPosts from "../components/User/UserPosts";
+import { mapGetters } from "vuex";
 export default {
   name: "MyPage",
   components: {
@@ -19,16 +20,13 @@ export default {
   },
   data() {
     return {
-      user: null,
-      posts: null
+      user: null
     };
   },
   computed: {
+    ...mapGetters(["requestHeader", "userPosts"]),
     userId() {
       return this.$store.getters.loggedInUser.user_id;
-    },
-    requestHeader() {
-      return this.$store.getters.requestHeader;
     }
   },
   methods: {
@@ -42,21 +40,12 @@ export default {
         .catch(err => {
           console.log(err);
         });
-    },
-    getLoginUsersPosts(reqUrl) {
-      axios
-        .get(`${reqUrl}/api/v1/user/${this.userId}/posts/`, this.requestHeader)
-        .then(res => {
-          const { data } = res;
-          this.posts = data;
-        })
-        .catch(err => console.log(err));
     }
   },
   mounted() {
     const requestUrl = "http://localhost:8000";
     this.getLoginUser(requestUrl);
-    this.getLoginUsersPosts(requestUrl);
+    this.$store.dispatch("getUserPostsAction", this.userId);
   },
   created() {
     // 비 로그인시 차단

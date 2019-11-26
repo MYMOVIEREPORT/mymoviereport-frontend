@@ -19,6 +19,14 @@ const mutations = {
 	updateMoviePosts(state, post) {
 		state.moviePosts.push(post);
 	},
+	deleteMoviePost(state, postId) {
+		if (state.moviePosts) {
+			const postIdx = state.moviePosts.findIndex(post => post.id === postId);
+			if (postIdx > -1) {
+				state.moviePosts.splice(postIdx, 1);
+			}
+		}
+	},
 };
 
 const actions = {
@@ -27,6 +35,9 @@ const actions = {
 	},
 	updateMoviePostsAction(options, post) {
 		options.commit('updateMoviePosts', post);
+	},
+	deleteMoviePostAction(options, postId) {
+		options.commit('deleteMoviePost', postId);
 	},
 };
 

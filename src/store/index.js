@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import auth from './modules/auth';
 import movie from './modules/movie';
 import moviePosts from './modules/moviePosts';
+import userPosts from './modules/userPosts';
 
 Vue.use(Vuex);
 
@@ -14,5 +15,6 @@ export default new Vuex.Store({
 		auth,
 		movie,
 		moviePosts,
+		userPosts,
 	},
 });

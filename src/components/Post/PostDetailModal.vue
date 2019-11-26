@@ -39,11 +39,20 @@
                 />
                 <!-- <div>{{ post.movie.id }}</div> -->
                 <div class="d-flex flex-column align-items-center justify-content-center ml-3">
-                  <NotCertifiedMark v-if="!isAuthenticated || loggedInUser.user_id !== post.user" />
-                  <CertifiedMark
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center"
+                    v-if="!isAuthenticated || loggedInUser.user_id !== post.user"
+                  >
+                    <div style="font-size:0.5rem" class="text-muted">NEED REPORT</div>
+                    <NotCertifiedMark />
+                  </div>
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center"
                     v-if="isAuthenticated && loggedInUser.user_id === post.user"
-                    fill="#fbc531"
-                  />
+                  >
+                    <div style="font-size:0.5rem;color:#fbc531;">REPORTED</div>
+                    <CertifiedMark fill="#fbc531" />
+                  </div>
                   <h5 class="text-break text-center m-0 mt-1">{{ post.movie.title_ko }}</h5>
                 </div>
               </div>
@@ -105,7 +114,16 @@ export default {
       axios
         .delete(`${reqUrl}/api/v1/post/${this.post.id}/`, this.requestHeader)
         .then(() => {
-          this.$router.push("/mypage");
+          const body = document.querySelector("body");
+          const modal = document.querySelector(".modal");
+          const modalBack = document.querySelector(".modal-backdrop");
+          modal.classList.toggle("show");
+          modal.style.display = "none";
+          modalBack.remove();
+          body.classList.toggle("modal-open");
+
+          this.$store.dispatch("deleteMoviePostAction", this.post.id);
+          this.$store.dispatch("deleteUserPostAction", this.post.id);
         })
         .catch(err => console.log(err.response));
     }
