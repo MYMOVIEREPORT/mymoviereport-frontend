@@ -49,7 +49,7 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-primary" @click="createPost">
-            <Loading v-if="requesting" />
+            <Loading v-if="requesting" size="small" />
             <span>완료</span>
           </button>
         </div>
