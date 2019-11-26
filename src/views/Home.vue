@@ -10,8 +10,7 @@
         <hr />
       </div>
       <div class="m-3">
-        <MovieListHorizontal :movies="newMovies" />
-        <!-- <MovieList :movies="newMovies" /> -->
+        <MovieList :movies="newMovies" :horizontal="true" />
       </div>
     </div>
     <div>
@@ -20,7 +19,7 @@
         <hr />
       </div>
       <div class="m-3">
-        <MovieListHorizontal :movies="hotMovies" />
+        <MovieList :movies="hotMovies" :horizontal="true" />
       </div>
     </div>
     <div class="etc dark-bg">
@@ -33,7 +32,7 @@
                 <span class="ml-2">LATEST REPORT</span>
               </div>
               <hr class="dark-br" />
-              <PostList :posts="posts" />
+              <PostList :posts="posts" :small="true" />
             </div>
           </div>
           <div class="col-12 col-md-4">
@@ -48,20 +47,18 @@
 <script>
 // @ is an alias to /src
 import PostList from "../components/Post/PostList";
-// import MovieList from "../components/Movie/MovieList";
+import MovieList from "../components/Movie/MovieList";
 import Ranking from "../components/User/Ranking";
 import MovieCarousel from "../components/Movie/MovieCarousel";
-import MovieListHorizontal from "../components/Movie/MovieListHorizontal";
 import FastTimeIcon from "../components/Icon/FastTimeIcon";
 import axios from "axios";
 export default {
   name: "home",
   components: {
     PostList,
-    // MovieList,
+    MovieList,
     Ranking,
     MovieCarousel,
-    MovieListHorizontal,
     FastTimeIcon
   },
   data() {

@@ -5,22 +5,22 @@
       <div class="carousel-item active">
         <img :src="movies[0].poster_url" class="d-block w-100" alt="..." />
         <div class="carousel-caption d-none d-md-block">
-          <h5>첫슬라</h5>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h5>{{movies[0].title_ko}}</h5>
+          <p>{{movies[0].description}}</p>
         </div>
       </div>
       <div class="carousel-item">
         <img :src="movies[1].poster_url" class="d-block w-100" alt="..." />
         <div class="carousel-caption d-none d-md-block">
-          <h5>두슬라</h5>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h5>{{movies[1].title_ko}}</h5>
+          <p>{{movies[1].description}}</p>
         </div>
       </div>
       <div class="carousel-item">
         <img :src="movies[2].poster_url" class="d-block w-100" alt="..." />
         <div class="carousel-caption d-none d-md-block">
-          <h5>삼슬라</h5>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h5>{{movies[2].title_ko}}</h5>
+          <p>{{movies[2].description}}</p>
         </div>
       </div>
     </div>
