@@ -17,9 +17,7 @@ const mutations = {
 			.catch(err => console.log(err));
 	},
 	updateMoviePosts(state, post) {
-		if (post.published) {
-			state.moviePosts.push(post);
-		}
+		state.moviePosts.push(post);
 	},
 };
 

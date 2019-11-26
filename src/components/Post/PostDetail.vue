@@ -3,6 +3,7 @@
     <div>
       <!-- 로그인 시 수정/삭제 버튼 -->
       <div v-if="isAuthenticated">
+        <div>본인여부 확인하셈</div>
         <button class="btn btn-sm btn-danger" @click="deletePost">포스트 삭제</button>
         <button class="btn btn-sm btn-info">포스트 수정</button>
       </div>

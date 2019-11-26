@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PostList :posts="posts" />
+    <PostList :posts="posts" :small="true" :mine="true" />
   </div>
 </template>
 

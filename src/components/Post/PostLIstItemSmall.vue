@@ -4,7 +4,6 @@
       <img :src="post.image" alt />
     </div>
     <div class="post-text" v-show="textShow">
-      <div>{{post.movie.title_ko}}</div>
       <div class="m-0">{{post.title}}</div>
       <div>{{post.score}}점</div>
     </div>
