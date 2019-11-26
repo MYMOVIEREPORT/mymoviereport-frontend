@@ -7,6 +7,7 @@
         <div>
           <router-link to="/">Home</router-link>
           <router-link to="/movies">Movies</router-link>
+          <SearchBar />
         </div>
         <div v-if="isAuthenticated">
           <router-link to="/mypage">{{userName}}</router-link>
@@ -20,7 +21,9 @@
     </nav>
 
     <!-- 라우터 뷰 -->
-    <router-view />
+    <div style="flex-grow:1">
+      <router-view />
+    </div>
 
     <!-- 푸터 -->
     <footer class="footer">
@@ -30,8 +33,12 @@
 </template>
 
 <script>
+import SearchBar from "./components/Util/SearchBar";
 export default {
   name: "App",
+  components: {
+    SearchBar
+  },
   methods: {
     logout() {
       this.$store.dispatch("logout");
@@ -51,6 +58,12 @@ export default {
 </script>
 
 <style>
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 nav {
   padding: 0 2rem;
   background-color: transparent;

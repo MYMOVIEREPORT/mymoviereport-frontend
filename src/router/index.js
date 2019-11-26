@@ -7,6 +7,7 @@ import MyPage from '../views/MyPage.vue';
 import Post from '../views/Post.vue';
 import Movies from '../views/Movies.vue';
 import Movie from '../views/Movie.vue';
+import Search from '../views/Search.vue';
 
 Vue.use(VueRouter);
 
@@ -46,6 +47,12 @@ const routes = [
 		path: '/movie/:movieId',
 		name: 'movie',
 		component: Movie,
+		props: true,
+	},
+	{
+		path: '/search/:keyword',
+		name: 'search',
+		component: Search,
 		props: true,
 	},
 ];
