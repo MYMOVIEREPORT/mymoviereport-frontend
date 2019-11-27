@@ -1,131 +1,148 @@
 <template>
-  <form class="vue-auth-form">
-    <h1 class="text-center mb-3">MMR</h1>
+	<form class="vue-auth-form">
+		<h1 class="text-center mb-3">MMR</h1>
 
-    <div class="form-group row">
-      <label class="col-sm-4 col-form-label" for="username">사용자이름</label>
-      <div class="col-sm-8">
-        <input id="username" class="form-control" type="text" v-model="credential.username" />
-        <small v-if="error.username">{{error.username}}</small>
-      </div>
-    </div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label" for="username">사용자이름</label>
+			<div class="col-sm-8">
+				<input
+					id="username"
+					class="form-control"
+					type="text"
+					v-model="credential.username"
+				/>
+				<small v-if="error.username">{{ error.username }}</small>
+			</div>
+		</div>
 
-    <div class="form-group row">
-      <label class="col-sm-4 col-form-label" for="pwd">비밀번호</label>
-      <div class="col-sm-8">
-        <input id="pwd" class="form-control" type="password" v-model="credential.password" />
-        <small v-if="error.password">{{error.password}}</small>
-      </div>
-    </div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label" for="pwd">비밀번호</label>
+			<div class="col-sm-8">
+				<input
+					id="pwd"
+					class="form-control"
+					type="password"
+					v-model="credential.password"
+				/>
+				<small v-if="error.password">{{ error.password }}</small>
+			</div>
+		</div>
 
-    <div class="form-group row">
-      <label class="col-sm-4 col-form-label" for="pwd_confirm">비밀번호 확인</label>
-      <div class="col-sm-8">
-        <input
-          id="pwd_confirm"
-          class="form-control"
-          type="password"
-          v-model="credential.passwordConfirm"
-        />
-        <small v-if="error.passwordConfirm">{{error.passwordConfirm}}</small>
-      </div>
-    </div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label" for="pwd_confirm"
+				>비밀번호 확인</label
+			>
+			<div class="col-sm-8">
+				<input
+					id="pwd_confirm"
+					class="form-control"
+					type="password"
+					v-model="credential.passwordConfirm"
+				/>
+				<small v-if="error.passwordConfirm">{{ error.passwordConfirm }}</small>
+			</div>
+		</div>
 
-    <div class="form-group row">
-      <label class="col-sm-4 col-form-label" for="email">이메일</label>
-      <div class="col-sm-8">
-        <input id="email" class="form-control" type="email" v-model="credential.email" />
-        <small v-if="error.email">{{error.email}}</small>
-      </div>
-    </div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label" for="email">이메일</label>
+			<div class="col-sm-8">
+				<input
+					id="email"
+					class="form-control"
+					type="email"
+					v-model="credential.email"
+				/>
+				<small v-if="error.email">{{ error.email }}</small>
+			</div>
+		</div>
 
-    <div class="form-group row">
-      <label class="col-sm-4 col-form-label" for="age">연령</label>
-      <div class="col-sm-8">
-        <input
-          id="age"
-          class="form-control"
-          type="number"
-          v-model="credential.age"
-          min="1"
-          max="200"
-        />
-        <small v-if="error.age">{{error.age}}</small>
-      </div>
-    </div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label" for="age">연령</label>
+			<div class="col-sm-8">
+				<input
+					id="age"
+					class="form-control"
+					type="number"
+					v-model="credential.age"
+					min="1"
+					max="200"
+				/>
+				<small v-if="error.age">{{ error.age }}</small>
+			</div>
+		</div>
 
-    <button @click.prevent="signup" class="btn btn-primary">회원가입</button>
-  </form>
+		<button @click.prevent="signup" class="btn btn-primary">회원가입</button>
+	</form>
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 export default {
-  name: "SignupForm",
-  data() {
-    return {
-      credential: {
-        username: "",
-        password: "",
-        passwordConfirm: "",
-        email: "",
-        age: "",
-        // 일단 기본값. 프로필 수정에서 변경 가능하도록.
-        thumbnail:
-          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-      },
-      error: {
-        username: "",
-        password: "",
-        passwordConfirm: "",
-        email: "",
-        age: ""
-      }
-    };
-  },
-  methods: {
-    validation() {
-      if (this.credential.password !== this.credential.passwordConfirm) {
-        this.error.passwordConfirm = "비밀번호가 동일하지 않습니다.";
-        return false;
-      }
-      return true;
-    },
-    signup() {
-      this.error = {
-        username: "",
-        password: "",
-        passwordConfirm: "",
-        email: "",
-        age: ""
-      };
-      if (this.validation()) {
-        const requestUrl = "http://localhost:8000";
-        axios
-          .post(`${requestUrl}/auth/signup/`, this.credential)
-          .then(res => {
-            // 로그인 시키고 홈으로.
-            const { token } = res.data;
-            this.$store.dispatch("setTokenAction", token);
-            this.$session.set("mmr-token", token);
-            this.$router.push("/");
-          })
-          .catch(err => {
-            const { data } = err.response;
-            for (let key in data) {
-              if (data.hasOwnProperty(key)) {
-                this.error[key] = data[key][0];
-              }
-            }
-          });
-      }
-    }
-  }
+	name: 'SignupForm',
+	data() {
+		return {
+			credential: {
+				username: '',
+				password: '',
+				passwordConfirm: '',
+				email: '',
+				age: '',
+				// 일단 기본값. 프로필 수정에서 변경 가능하도록.
+				thumbnail:
+					'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+			},
+			error: {
+				username: '',
+				password: '',
+				passwordConfirm: '',
+				email: '',
+				age: '',
+			},
+		};
+	},
+	methods: {
+		validation() {
+			if (this.credential.password !== this.credential.passwordConfirm) {
+				this.error.passwordConfirm = '비밀번호가 동일하지 않습니다.';
+				return false;
+			}
+			return true;
+		},
+		signup() {
+			this.error = {
+				username: '',
+				password: '',
+				passwordConfirm: '',
+				email: '',
+				age: '',
+			};
+			if (this.validation()) {
+				const requestUrl = process.env.VUE_APP_REQUEST_URL;
+				axios
+					.post(`${requestUrl}/auth/signup/`, this.credential)
+					.then(res => {
+						// 로그인 시키고 홈으로.
+						const { token } = res.data;
+						this.$store.dispatch('setTokenAction', token);
+						this.$session.set('mmr-token', token);
+						this.$router.push('/');
+					})
+					.catch(err => {
+						const { data } = err.response;
+						for (let key in data) {
+							if (data.hasOwnProperty(key)) {
+								this.error[key] = data[key][0];
+							}
+						}
+					});
+			}
+		},
+	},
 };
 </script>
 
 <style scoped>
 small {
-  color: red;
+	color: red;
 }
 </style>
