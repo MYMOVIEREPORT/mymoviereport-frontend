@@ -40,7 +40,6 @@ export default {
 				}
 			});
 			genres.forEach((value, key) => {
-				console.log(value, key);
 				this.series.push(value);
 				this.chartOptions.labels.push(key);
 			});
