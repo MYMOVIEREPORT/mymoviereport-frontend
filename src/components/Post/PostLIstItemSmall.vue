@@ -1,17 +1,19 @@
 <template>
-	<div
-		class="post-wrapper"
-		data-toggle="modal"
-		:data-target="`#post-${post.id}`"
-		@mouseover="active"
-		@mouseleave="deactivate"
-	>
-		<div class="post-image-wrapper">
-			<img :src="post.image" alt />
-		</div>
-		<div class="post-text" v-show="textShow">
-			<div class="m-0">{{ post.title }}</div>
-			<div>{{ post.score }}점</div>
+	<div>
+		<div
+			class="post-wrapper"
+			data-toggle="modal"
+			:data-target="`#post-${post.id}`"
+			@mouseover="active"
+			@mouseleave="deactivate"
+		>
+			<div class="post-image-wrapper">
+				<img :src="post.image" alt />
+			</div>
+			<div class="post-text" v-show="textShow">
+				<div class="m-0">{{ post.title }}</div>
+				<div>{{ post.score }}점</div>
+			</div>
 		</div>
 		<PostDetailModal :post="post" />
 	</div>
