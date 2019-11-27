@@ -1,10 +1,27 @@
 <template>
-	<div class="container pt-5">
-		<UserProfile :user="user" />
-		<h5>유저가 쓴 포스트</h5>
-		<hr />
-		<UserPosts :posts="userPosts" />
-		<Uploader />
+	<Loading v-if="!user" />
+	<div v-else>
+		<div class="container pt-5">
+			<UserProfile :user="user" />
+		</div>
+		<div class="container">
+			<h5>{{ user.username }}님이 선호하는 장르 추천영화</h5>
+			<hr />
+		</div>
+		<MovieList
+			v-if="recommandMovies.length > 0"
+			:horizontal="true"
+			:movies="recommandMovies"
+		/>
+		<h5 class="text-center text-muted" v-else>
+			영화를 추천하기에 정보가 부족합니다.
+		</h5>
+		<div class="container">
+			<h5>유저가 쓴 포스트</h5>
+			<hr />
+		</div>
+		<UserPosts v-if="userPosts.length > 0" :posts="userPosts" />
+		<h5 class="text-center text-muted" v-else>남겨진 포스트가 없습니다.</h5>
 	</div>
 </template>
 
@@ -12,19 +29,22 @@
 import axios from 'axios';
 import UserProfile from '../components/User/UserProfile';
 import UserPosts from '../components/User/UserPosts';
-import Uploader from '../components/Util/Uploader';
 import { mapGetters } from 'vuex';
+import MovieList from '../components/Movie/MovieList';
+import Loading from '../components/Util/Loading';
 
 export default {
 	name: 'MyPage',
 	components: {
 		UserProfile,
 		UserPosts,
-		Uploader,
+		MovieList,
+		Loading,
 	},
 	data() {
 		return {
 			user: null,
+			recommandMovies: [],
 		};
 	},
 	computed: {
@@ -45,11 +65,28 @@ export default {
 					console.log(err);
 				});
 		},
+		getRecommandMovies() {
+			const requestUrl = process.env.VUE_APP_REQUEST_URL;
+			axios
+				.get(
+					`${requestUrl}/api/v1/user/${this.userId}/recos/`,
+					this.requestHeader
+				)
+				.then(res => {
+					// console.log(res);
+					const { data } = res;
+					if (data.constructor === Array) {
+						this.recommandMovies = data;
+					}
+				})
+				.catch(err => console.log(err));
+		},
 	},
 	mounted() {
-		const requestUrl = 'http://localhost:8000';
+		const requestUrl = process.env.VUE_APP_REQUEST_URL;
 		this.getLoginUser(requestUrl);
 		this.$store.dispatch('getUserPostsAction', this.userId);
+		this.getRecommandMovies();
 	},
 	created() {
 		// 비 로그인시 차단
