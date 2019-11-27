@@ -25,6 +25,11 @@ import Loading from '../Util/Loading';
 import UserUpdateModal from './UserUpdateModal';
 export default {
 	name: 'UserProfile',
+	data() {
+		return {
+			dialog: false,
+		};
+	},
 	components: {
 		Loading,
 		UserUpdateModal,
