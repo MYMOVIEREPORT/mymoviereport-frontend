@@ -18,6 +18,7 @@
 						<!-- 타이틀 + 공개여부 -->
 						<div class="d-flex justify-content-between align-items-center px-3">
 							<h5 class="m-0">{{ post.title }}</h5>
+							<input type="text" name="" id="" v-show="modify" />
 							<h6 class="m-0">
 								<span v-if="post.published" class="badge badge-success"
 									>공개중</span
@@ -39,7 +40,6 @@
 									style="width:70px;border-radius:5px;"
 									class="p-0"
 								/>
-								<!-- <div>{{ post.movie.id }}</div> -->
 								<div
 									class="d-flex flex-column align-items-center justify-content-center ml-3"
 								>
@@ -118,6 +118,11 @@ import TrashIcon from '../Icon/TrashIcon';
 import UpdateIcon from '../Icon/UpdateIcon';
 export default {
 	name: 'PostDetail',
+	data() {
+		return {
+			modify: false,
+		};
+	},
 	props: {
 		post: {
 			type: Object,
@@ -134,23 +139,30 @@ export default {
 		...mapGetters(['requestHeader', 'isAuthenticated', 'loggedInUser']),
 	},
 	methods: {
+		removeModal() {
+			const body = document.querySelector('body');
+			const modal = document.querySelector('.modal');
+			const modalBack = document.querySelector('.modal-backdrop');
+			modal.classList.toggle('show');
+			modal.style.display = 'none';
+			modalBack.remove();
+			body.classList.toggle('modal-open');
+		},
 		deletePost() {
 			const reqUrl = 'http://localhost:8000';
 			axios
 				.delete(`${reqUrl}/api/v1/post/${this.post.id}/`, this.requestHeader)
 				.then(() => {
-					const body = document.querySelector('body');
-					const modal = document.querySelector('.modal');
-					const modalBack = document.querySelector('.modal-backdrop');
-					modal.classList.toggle('show');
-					modal.style.display = 'none';
-					modalBack.remove();
-					body.classList.toggle('modal-open');
-
+					this.removeModal();
 					this.$store.dispatch('deleteMoviePostAction', this.post.id);
 					this.$store.dispatch('deleteUserPostAction', this.post.id);
 				})
 				.catch(err => console.log(err.response));
+		},
+		onModify() {
+			this.removeModal();
+
+			this.$router.push(`/post/${this.post.id}/update/`);
 		},
 	},
 };

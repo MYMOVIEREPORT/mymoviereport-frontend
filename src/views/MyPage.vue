@@ -9,7 +9,7 @@
 			<hr />
 		</div>
 		<MovieList
-			v-if="recommandMovies.length > 0"
+			v-if="recommandMovies"
 			:horizontal="true"
 			:movies="recommandMovies"
 		/>
@@ -20,7 +20,7 @@
 			<h5>유저가 쓴 포스트</h5>
 			<hr />
 		</div>
-		<UserPosts v-if="userPosts.length > 0" :posts="userPosts" />
+		<UserPosts v-if="userPosts" :posts="userPosts" />
 		<h5 class="text-center text-muted" v-else>남겨진 포스트가 없습니다.</h5>
 	</div>
 </template>
