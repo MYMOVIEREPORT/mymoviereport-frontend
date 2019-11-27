@@ -110,6 +110,16 @@ export default {
 		...mapGetters(['requestHeader', 'movie']),
 	},
 	methods: {
+		removeModal() {
+			// 모달 제거
+			const body = document.querySelector('body');
+			const modal = document.querySelector('.modal');
+			const modalBack = document.querySelector('.modal-backdrop');
+			modal.classList.toggle('show');
+			modal.style.display = 'none';
+			modalBack.remove();
+			body.classList.toggle('modal-open');
+		},
 		createPost() {
 			const reqUrl = process.env.VUE_APP_REQUEST_URL;
 			if (!this.requesting && !this.uploading) {
@@ -121,15 +131,7 @@ export default {
 
 						// 평가에 추가
 						this.$store.dispatch('updateMoviePostsAction', data);
-						// 모달 제거
-						const body = document.querySelector('body');
-						const modal = document.querySelector('.modal');
-						const modalBack = document.querySelector('.modal-backdrop');
-						modal.classList.toggle('show');
-						modal.style.display = 'none';
-						modalBack.remove();
-						body.classList.toggle('modal-open');
-
+						this.removeModal();
 						this.requesting = false;
 						// 평가한 포스트라고 알려주기
 						this.$emit('userPosted');

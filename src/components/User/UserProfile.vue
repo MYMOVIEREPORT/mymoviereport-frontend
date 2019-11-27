@@ -7,15 +7,17 @@
 			</div>
 			<h3 class="text-center">{{ user.username }}</h3>
 			<h5 class="text-center text-muted font-italic">{{ user.email }}</h5>
-			<button
-				type="button"
-				class="btn btn-primary"
-				data-toggle="modal"
-				:data-target="`#user-${user.id}`"
-			>
-				프로필 수정
-			</button>
-			<UserUpdateModal :user="user" />
+			<div class="d-flex justify-content-center my-3">
+				<button
+					type="button"
+					class="btn btn-primary w-auto"
+					data-toggle="modal"
+					:data-target="`#user-${user.id}`"
+				>
+					프로필 수정
+				</button>
+			</div>
+			<UserUpdateModal :user="user" @userUpdated="onUserUpdated" />
 		</div>
 	</div>
 </template>
@@ -25,11 +27,6 @@ import Loading from '../Util/Loading';
 import UserUpdateModal from './UserUpdateModal';
 export default {
 	name: 'UserProfile',
-	data() {
-		return {
-			dialog: false,
-		};
-	},
 	components: {
 		Loading,
 		UserUpdateModal,
@@ -42,6 +39,13 @@ export default {
 	props: {
 		user: {
 			type: Object,
+		},
+	},
+	methods: {
+		onUserUpdated(data) {
+			const { email, thumbnail } = data;
+			this.user.email = email;
+			this.user.thumbnail = thumbnail;
 		},
 	},
 };

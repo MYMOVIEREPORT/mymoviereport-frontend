@@ -34,9 +34,6 @@
 								aria-describedby="emailHelp"
 								v-model="updatedUser.email"
 							/>
-							<small id="emailHelp" class="form-text text-muted"
-								>We'll never share your email with anyone else.</small
-							>
 						</div>
 						<div>
 							<label>프로필사진</label>
@@ -54,12 +51,17 @@
 								style="width:200px"
 							/>
 						</div>
+						<small
+							v-if="errMessage"
+							class="form-text text-danger text-center"
+							>{{ errMessage }}</small
+						>
 					</form>
 				</div>
 
 				<!-- 푸터 -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">
 						취소
 					</button>
 					<button type="button" class="btn btn-warning" @click="onUpdate">
@@ -85,6 +87,7 @@ export default {
 				thumbnail: this.user.thumbnail,
 			},
 			uploading: false,
+			errMessage: '',
 		};
 	},
 	props: {
@@ -111,9 +114,18 @@ export default {
 		onUploadErr() {
 			this.uploading = false;
 		},
+		removeModal() {
+			// 모달 제거
+			const body = document.querySelector('body');
+			const modal = document.querySelector('.modal');
+			const modalBack = document.querySelector('.modal-backdrop');
+			modal.classList.toggle('show');
+			modal.style.display = 'none';
+			modalBack.remove();
+			body.classList.toggle('modal-open');
+		},
 		onUpdate() {
 			const requestUrl = process.env.VUE_APP_REQUEST_URL;
-			console.log(this);
 			if (!this.uploading) {
 				axios
 					.put(
@@ -121,8 +133,14 @@ export default {
 						this.updatedUser,
 						this.requestHeader
 					)
-					.then(res => console.log(res))
-					.catch(err => console.log(err));
+					.then(res => {
+						const { data } = res;
+						this.$emit('userUpdated', data);
+						this.removeModal();
+					})
+					.catch(() => {
+						this.errMessage = '이메일 또는 이미지 업로드 상태를 확인해주세요.';
+					});
 			}
 		},
 	},
