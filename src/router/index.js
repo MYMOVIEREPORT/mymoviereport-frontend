@@ -8,7 +8,6 @@ import Post from '../views/Post.vue';
 import Movies from '../views/Movies.vue';
 import Movie from '../views/Movie.vue';
 import Search from '../views/Search.vue';
-import Update from '../views/Update.vue';
 
 Vue.use(VueRouter);
 
@@ -54,12 +53,6 @@ const routes = [
 		path: '/search/:keyword',
 		name: 'search',
 		component: Search,
-		props: true,
-	},
-	{
-		path: '/post/:postId/update',
-		name: 'postUpdate',
-		component: Update,
 		props: true,
 	},
 ];
