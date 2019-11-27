@@ -4,24 +4,26 @@
 		<div class="container pt-5">
 			<UserProfile :user="user" />
 		</div>
+		<!-- 추천 장르  -->
 		<div class="container">
 			<h5>{{ user.username }}님이 선호하는 장르 추천영화</h5>
 			<hr />
 		</div>
 		<MovieList
-			v-if="recommandMovies"
+			v-if="recommandMovies.length > 0"
 			:horizontal="true"
 			:movies="recommandMovies"
 		/>
 		<h5 class="text-center text-muted" v-else>
 			영화를 추천하기에 정보가 부족합니다.
 		</h5>
+		<!-- 포스트 리스트 -->
 		<div class="container">
 			<h5>유저가 쓴 포스트</h5>
 			<hr />
 		</div>
-		<UserPosts v-if="userPosts" :posts="userPosts" />
-		<h5 class="text-center text-muted" v-else>남겨진 포스트가 없습니다.</h5>
+		<UserPosts v-if="recommandMovies.length > 0" :posts="userPosts" />
+		<h5 v-else class="text-center text-muted">남겨진 포스트가 없습니다.</h5>
 	</div>
 </template>
 
