@@ -8,6 +8,7 @@
           role="button"
           aria-haspopup="true"
           aria-expanded="false"
+          style="font-weight:bold;"
         >장르선택</div>
         <div class="dropdown-menu">
           <router-link
@@ -19,17 +20,29 @@
         </div>
       </li>
       <li class="nav-item">
-        <router-link class="nav-link" to="/movies">전체보기</router-link>
+        <router-link class="nav-link" to="/movies" style="color:#4a69bd;font-weight:bold;">전체보기</router-link>
       </li>
 
       <li class="nav-item">
-        <router-link class="nav-link" to="/movies/score/7/10">⭐️ 호평 영화</router-link>
+        <router-link
+          class="nav-link"
+          to="/movies/score/7/10"
+          style="color:#4a69bd;font-weight:bold;"
+        >😍 호평 영화</router-link>
       </li>
       <li class="nav-item">
-        <router-link class="nav-link" to="/movies/score/4/7">⭐️ 괜찮은 영화</router-link>
+        <router-link
+          class="nav-link"
+          to="/movies/score/4/7"
+          style="color:#4a69bd;font-weight:bold;"
+        >🤔 괜찮은 영화</router-link>
       </li>
       <li class="nav-item">
-        <router-link class="nav-link" to="/movies/score/1/4">⭐️ 평가가 낮은 영화</router-link>
+        <router-link
+          class="nav-link"
+          to="/movies/score/1/4"
+          style="color:#4a69bd;font-weight:bold;"
+        >😨 평가가 낮은 영화</router-link>
       </li>
     </ul>
     <router-view></router-view>

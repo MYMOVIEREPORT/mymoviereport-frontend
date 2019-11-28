@@ -48,18 +48,21 @@
           </div>
         </div>
       </div>
-      <h5>리포트 분석</h5>
+      <h5 class="d-flex align-items-center">
+        <AnalyseIcon fill="#00b894" />
+        <span class="ml-2 font-weight-bold">리포트 분석</span>
+      </h5>
       <hr />
       <div class="row">
         <div
           class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center my-2"
         >
-          <h3>총 평가 영화 수</h3>
+          <h3 class="font-weight-bold">총 평가 영화 수</h3>
           <h2 class="d-flex align-items-center">
             <FilmIcon fill="#d35400" />
             <span class="ml-2">{{ postCount }}</span>
           </h2>
-          <h3>평가한 영화 점수 평균</h3>
+          <h3 class="font-weight-bold">평가한 영화 점수 평균</h3>
           <h2 class="d-flex align-items-center">
             <StarIcon fill="#f9ca24" />
             <span class="ml-2">{{ totalPostScore }}</span>
@@ -83,6 +86,7 @@ import axios from "axios";
 import { mapGetters } from "vuex";
 import FilmIcon from "../Icon/FilmIcon";
 import StarIcon from "../Icon/StarIcon";
+import AnalyseIcon from "../Icon/AnalyseIcon";
 export default {
   name: "UserProfile",
   components: {
@@ -90,7 +94,8 @@ export default {
     UserUpdateModal,
     DonutChart,
     FilmIcon,
-    StarIcon
+    StarIcon,
+    AnalyseIcon
   },
   computed: {
     ...mapGetters(["requestHeader"]),

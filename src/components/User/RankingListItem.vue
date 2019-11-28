@@ -1,7 +1,15 @@
 <template>
   <div class="row ranking-list-wrapper">
     <div class="col-4">
-      <h5 class="m-0 text-center rank"># {{ rank + 1 }}</h5>
+      <h5 v-if="rank === 0" class="m-0 text-center rank" style="color:#fdcb6e">
+        <span class="mr-2">
+          #
+          <FirstPrize fill="#fdcb6e" />
+        </span>
+      </h5>
+      <h5 v-else-if="rank === 1" class="m-0 text-center rank" style="color:#aaa69d"># {{ rank + 1 }}</h5>
+      <h5 v-else-if="rank === 2" class="m-0 text-center rank" style="color:#cd6133"># {{ rank + 1 }}</h5>
+      <h5 v-else class="m-0 text-center rank"># {{ rank + 1 }}</h5>
     </div>
     <div class="col-8 d-flex align-items-center justify-content-center">
       <div class="mr-3">
@@ -13,6 +21,7 @@
 </template>
 
 <script>
+import FirstPrize from "../Icon/FirstPrize";
 export default {
   name: "RankingListItem",
   props: {
@@ -22,6 +31,9 @@ export default {
     rank: {
       type: Number
     }
+  },
+  components: {
+    FirstPrize
   },
   data() {
     return {

@@ -6,7 +6,10 @@
     <!-- 최신영화 -->
     <div>
       <div class="container mb-0">
-        <h5>신작영화</h5>
+        <h5 class="d-flex align-items-center font-weight-bold">
+          <span class="badge badge-danger mr-2">NEW</span>
+          <span>신작영화</span>
+        </h5>
         <hr />
       </div>
       <div class="m-3">
@@ -16,7 +19,7 @@
     <!-- 리포트가 활발한 영화 -->
     <div>
       <div class="container mb-0">
-        <h5>🔥 최근 리포트가 활발한 영화</h5>
+        <h5 class="font-weight-bold">🔥 최근 리포트가 활발한 영화</h5>
         <hr />
       </div>
       <div class="m-3">
@@ -30,10 +33,10 @@
           <!-- 최근 포스트들 -->
           <div class="col-12 col-md-8">
             <div class="mb-3">
-              <div class="d-flex align-items-center">
+              <h6 class="d-flex align-items-center">
                 <FastTimeIcon fill="#e17055" />
-                <span class="ml-2">LATEST REPORT</span>
-              </div>
+                <span class="ml-2 font-weight-bold">최근 리포트</span>
+              </h6>
               <hr class="dark-br" />
               <PostList :posts="posts" :small="true" />
             </div>
@@ -84,7 +87,7 @@ export default {
         })
         .then(res => {
           const { data } = res;
-          this.posts = data;
+          this.posts = data.slice(0, 12);
         })
         .catch(err => console.log(err));
     },
