@@ -147,8 +147,6 @@ export default {
       .then(({ data }) => {
         if (data.length > 0) {
           this.posts = data;
-          this.$session.remove("mmr-token");
-          this.$router.push("/");
         }
       })
       .catch(err => console.log(err));

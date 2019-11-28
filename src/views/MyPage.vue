@@ -73,8 +73,8 @@ export default {
           this.requestHeader
         )
         .then(res => {
-          // console.log(res);
           const { data } = res;
+
           if (data.constructor === Array) {
             this.recommandMovies = data;
           }
@@ -85,14 +85,14 @@ export default {
   mounted() {
     const requestUrl = process.env.VUE_APP_REQUEST_URL;
     this.getLoginUser(requestUrl);
-    this.$store.dispatch("getUserPostsAction", this.userId);
     this.getRecommandMovies();
+    this.$store.dispatch("getUserPostsAction", this.userId);
   },
   created() {
     // 비 로그인시 차단
-    // if (!this.$store.getters.isAuthenticated) {
-    //   this.$router.push("/login");
-    // }
+    if (!this.$store.getters.isAuthenticated) {
+      this.$router.push("/login");
+    }
   }
 };
 </script>
