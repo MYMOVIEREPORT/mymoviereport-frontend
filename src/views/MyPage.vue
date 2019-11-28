@@ -1,7 +1,7 @@
 <template>
   <Loading v-if="!user" />
-  <div v-else>
-    <div class="container pt-5">
+  <div v-else class="py-5">
+    <div class="container">
       <UserProfile :user="user" />
     </div>
     <!-- 추천 장르  -->
