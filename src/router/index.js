@@ -10,6 +10,7 @@ import Search from '../views/Search.vue';
 import AllMovies from '../views/AllMovies.vue';
 import GenreMovies from '../views/GenreMovies.vue';
 import ScoreMovies from '../views/ScoreMovies.vue';
+import ErrorPage from '../views/Error.vue';
 
 Vue.use(VueRouter);
 
@@ -60,9 +61,11 @@ const routes = [
 		component: Search,
 		props: true,
 	},
+	{ path: '*', component: ErrorPage },
 ];
 
 const router = new VueRouter({
+	mode: 'history',
 	routes,
 });
 
