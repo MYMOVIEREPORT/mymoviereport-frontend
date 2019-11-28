@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       blankImageUrl:
-        "https://images-na.ssl-images-amazon.com/images/I/41959Ga9RbL._SY550_.jpg",
+        "https://mmr-album.s3.ap-northeast-2.amazonaws.com/1574919021313NoMovie.png",
       contentShow: false
     };
   },

@@ -4,10 +4,12 @@ import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import Signup from '../views/Signup.vue';
 import MyPage from '../views/MyPage.vue';
-import Post from '../views/Post.vue';
 import Movies from '../views/Movies.vue';
 import Movie from '../views/Movie.vue';
 import Search from '../views/Search.vue';
+import AllMovies from '../views/AllMovies.vue';
+import GenreMovies from '../views/GenreMovies.vue';
+import ScoreMovies from '../views/ScoreMovies.vue';
 
 Vue.use(VueRouter);
 
@@ -36,12 +38,15 @@ const routes = [
 		path: '/movies',
 		name: 'movies',
 		component: Movies,
-	},
-	{
-		path: '/post/:postId',
-		name: 'post',
-		component: Post,
-		props: true, // 해당 컴포넌트에서 params를 prop으로 사용 가능하게 한다.
+		children: [
+			{ path: '', component: AllMovies },
+			{ path: 'genre/:genreId', component: GenreMovies, props: true },
+			{
+				path: 'score/:minScore/:maxScore',
+				component: ScoreMovies,
+				props: true,
+			},
+		],
 	},
 	{
 		path: '/movie/:movieId',

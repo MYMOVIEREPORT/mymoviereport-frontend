@@ -1,85 +1,72 @@
 <template>
-	<div class="container pt-5">
-		<ul class="nav nav-tabs my-3">
-			<li class="nav-item">
-				<a class="nav-link active" href="#">전체보기</a>
-			</li>
-			<li class="nav-item dropdown">
-				<a
-					class="nav-link dropdown-toggle"
-					data-toggle="dropdown"
-					href="#"
-					role="button"
-					aria-haspopup="true"
-					aria-expanded="false"
-					>Genre</a
-				>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">Action</a>
-					<a class="dropdown-item" href="#">Another action</a>
-					<a class="dropdown-item" href="#">Something else here</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Separated link</a>
-				</div>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">10~7</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">7~4</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">4~1</a>
-			</li>
-		</ul>
-		<MovieList :movies="movies" />
-		<!-- 인피니티 스크롤-->
-		<InfiniteLoading @infinite="infiniteHandler" />
-	</div>
+  <div class="container pt-5">
+    <ul class="nav nav-tabs my-3">
+      <li class="nav-item dropdown">
+        <div
+          class="nav-link dropdown-toggle"
+          data-toggle="dropdown"
+          role="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >장르선택</div>
+        <div class="dropdown-menu">
+          <router-link
+            class="dropdown-item"
+            v-for="genre in genres"
+            :key="genre.id"
+            :to="`/movies/genre/${genre.id}`"
+          >{{genre.name}}</router-link>
+        </div>
+      </li>
+      <li class="nav-item">
+        <router-link class="nav-link" to="/movies">전체보기</router-link>
+      </li>
+
+      <li class="nav-item">
+        <router-link class="nav-link" to="/movies/score/7/10">⭐️ 호평 영화</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link class="nav-link" to="/movies/score/4/7">⭐️ 괜찮은 영화</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link class="nav-link" to="/movies/score/1/4">⭐️ 평가가 낮은 영화</router-link>
+      </li>
+    </ul>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-import axios from 'axios';
-import MovieList from '../components/Movie/MovieList';
-import InfiniteLoading from 'vue-infinite-loading';
+import axios from "axios";
 export default {
-	name: 'Movies',
-	data() {
-		return {
-			page: 1,
-			movies: [],
-		};
-	},
-	methods: {
-		infiniteHandler($state) {
-			const reqUrl = process.env.VUE_APP_REQUEST_URL;
-			axios
-				.get(`${reqUrl}/api/v1/movies/`, {
-					params: {
-						page: this.page,
-					},
-				})
-				.then(({ data }) => {
-					if (data.length) {
-						this.page += 1;
-						console.log(this.page);
-						this.movies.push(...data);
-						$state.loaded();
-					} else {
-						$state.complete();
-					}
-				});
-		},
-	},
-	computed: {
-		loading() {
-			return this.movies ? false : true;
-		},
-	},
-	components: {
-		MovieList,
-		InfiniteLoading,
-	},
+  name: "Movies",
+  data() {
+    return {
+      genres: [],
+      requesting: false
+    };
+  },
+  methods: {
+    getGenres() {
+      const requestUrl = process.env.VUE_APP_REQUEST_URL;
+      axios
+        .get(`${requestUrl}/api/v1/genres/`)
+        .then(({ data }) => {
+          this.genres = data;
+        })
+        .catch(err => console.log(err));
+    },
+    onClickGenre(id) {
+      this.selectedGenreId = id;
+    },
+    onClickMenu(e) {
+      const dom = e.target;
+      dom.classList.add("active");
+    }
+  },
+  mounted() {
+    this.getGenres();
+  }
 };
 </script>
 
