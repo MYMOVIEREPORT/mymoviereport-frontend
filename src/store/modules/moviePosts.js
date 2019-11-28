@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const reqUrl = 'http://localhost:8000';
+const reqUrl = 'https://mymoviereport.herokuapp.com';
 
 const state = {
 	moviePosts: [],

@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     getPublishedPosts() {
-      const reqUrl = "http://localhost:8000";
+      const reqUrl = process.env.VUE_APP_REQUEST_URL;
       axios
         .get(`${reqUrl}/api/v1/posts/`, {
           params: {
@@ -89,7 +89,7 @@ export default {
         .catch(err => console.log(err));
     },
     getHotMovies() {
-      const reqUrl = "http://localhost:8000";
+      const reqUrl = process.env.VUE_APP_REQUEST_URL;
       axios
         .get(`${reqUrl}/api/v1/movies/hot/`)
         .then(res => {
@@ -99,7 +99,7 @@ export default {
         .catch(err => console.log(err));
     },
     getNewMovies() {
-      const reqUrl = "http://localhost:8000";
+      const reqUrl = process.env.VUE_APP_REQUEST_URL;
       axios
         .get(`${reqUrl}/api/v1/movies/new/`)
         .then(res => {

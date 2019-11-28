@@ -21,7 +21,19 @@
           type="button"
           data-toggle="modal"
           :data-target="`#movie-${movie.id}`"
-        ><svg  xmlns="http://www.w3.org/2000/svg" fill="rgba(74, 105, 189,1.0)" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"/></svg></button>
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="rgba(74, 105, 189,1.0)"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"
+            />
+          </svg>
+        </button>
         <PostFormModal :movieId="movie.id" @userPosted="onUserPosted" />
       </div>
     </span>
@@ -50,9 +62,10 @@ export default {
       this.isUserPosted = true;
     },
     getUserPosted() {
+      const requestUrl = process.env.VUE_APP_REQUEST_URL;
       axios
         .get(
-          `http://localhost:8000/api/v1/user/${this.userId}/posts/`,
+          `${requestUrl}/api/v1/user/${this.userId}/posts/`,
           this.requestHeader
         )
         .then(res => {
@@ -84,12 +97,11 @@ export default {
 
 <style scoped>
 .vue-add-post-btn {
-  background:transparent;
-  border:none;
+  background: transparent;
+  border: none;
 }
 
-button:focus{
-  outline:none;
+button:focus {
+  outline: none;
 }
-
 </style>

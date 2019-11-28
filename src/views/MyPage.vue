@@ -90,9 +90,9 @@ export default {
   },
   created() {
     // 비 로그인시 차단
-    if (!this.$store.getters.isAuthenticated) {
-      this.$router.push("/login");
-    }
+    // if (!this.$store.getters.isAuthenticated) {
+    //   this.$router.push("/login");
+    // }
   }
 };
 </script>

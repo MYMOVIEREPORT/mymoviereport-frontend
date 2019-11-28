@@ -31,13 +31,15 @@ export default {
       axios
         .post(`${requestUrl}/auth/login/`, this.credential)
         .then(res => {
+          console.log(res);
           const { token } = res.data;
           this.$session.set("mmr-token", token); // 세션에 저장
           this.$store.dispatch("setTokenAction", token); // vuex token에 저장
 
           this.$router.push("/"); // 홈에 보내기
         })
-        .catch(() => {
+        .catch(err => {
+          console.log(err.response);
           this.loginAlert();
         });
     },
