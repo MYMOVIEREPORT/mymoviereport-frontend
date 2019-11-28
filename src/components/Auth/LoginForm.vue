@@ -2,10 +2,10 @@
   <form class="vue-auth-form">
     <h1 class="text-center mb-3">MMR</h1>
     <div class="form-group">
-      <input class="form-control" type="text" v-model="credential.username" placeholder="사용자 이름" />
+      <input class="form-control" type="text" @keyup="onUsername" placeholder="사용자 이름" />
     </div>
     <div class="form-group">
-      <input class="form-control" type="password" v-model="credential.password" placeholder="비밀번호" />
+      <input class="form-control" type="password" @keyup="onPassword" placeholder="비밀번호" />
     </div>
     <p v-if="errorMessage.length > 0" class="text-center" style="color:red">{{ errorMessage }}</p>
     <button @click="login" class="btn btn-primary">로그인</button>
@@ -42,7 +42,14 @@ export default {
         });
     },
     loginAlert() {
-      this.errorMessage = "아이디 또는 비밀번호가 올바르지 않습니다.";
+      this.errorMessage =
+        "아이디 또는 비밀번호가 올바르지 않습니다. / 한영키를 확인해주세요.";
+    },
+    onUsername(e) {
+      this.credential.username = e.target.value;
+    },
+    onPassword(e) {
+      this.credential.password = e.target.value;
     }
   }
 };

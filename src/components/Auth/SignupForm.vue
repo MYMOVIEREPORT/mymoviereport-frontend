@@ -5,7 +5,7 @@
     <div class="form-group row">
       <label class="col-sm-4 col-form-label" for="username">사용자이름</label>
       <div class="col-sm-8">
-        <input id="username" class="form-control" type="text" v-model="credential.username" />
+        <input id="username" class="form-control" type="text" @keyup="onUsername" />
         <small v-if="error.username">{{ error.username }}</small>
       </div>
     </div>
@@ -13,7 +13,7 @@
     <div class="form-group row">
       <label class="col-sm-4 col-form-label" for="pwd">비밀번호</label>
       <div class="col-sm-8">
-        <input id="pwd" class="form-control" type="password" v-model="credential.password" />
+        <input id="pwd" class="form-control" type="password" @keyup="onPassword" />
         <small v-if="error.password">{{ error.password }}</small>
       </div>
     </div>
@@ -21,12 +21,7 @@
     <div class="form-group row">
       <label class="col-sm-4 col-form-label" for="pwd_confirm">비밀번호 확인</label>
       <div class="col-sm-8">
-        <input
-          id="pwd_confirm"
-          class="form-control"
-          type="password"
-          v-model="credential.passwordConfirm"
-        />
+        <input id="pwd_confirm" class="form-control" type="password" @keyup="onPasswordConfirm" />
         <small v-if="error.passwordConfirm">{{ error.passwordConfirm }}</small>
       </div>
     </div>
@@ -119,6 +114,15 @@ export default {
             }
           });
       }
+    },
+    onUsername(e) {
+      this.credential.username = e.target.value;
+    },
+    onPassword(e) {
+      this.credential.password = e.target.value;
+    },
+    onPasswordConfirm(e) {
+      this.credential.passwordConfirm = e.target.value;
     }
   }
 };
