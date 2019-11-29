@@ -131,6 +131,15 @@ export default {
       this.user.email = email;
       this.user.thumbnail = thumbnail;
     },
+    removeModal() {
+      const body = document.querySelector("body");
+      const modal = document.querySelector(".modal");
+      const modalBack = document.querySelector(".modal-backdrop");
+      modal.classList.toggle("show");
+      modal.style.display = "none";
+      modalBack.remove();
+      body.classList.toggle("modal-open");
+    },
     onUserDelete() {
       const requestUrl = process.env.VUE_APP_REQUEST_URL;
       axios
@@ -138,7 +147,12 @@ export default {
           `${requestUrl}/api/v1/user/${this.user.id}/`,
           this.requestHeader
         )
-        .then(({ data }) => console.log(data))
+        .then(() => {
+          this.$store.dispatch("logout");
+          this.$session.remove("mmr-token");
+          this.removeModal();
+          this.$router.push("/");
+        })
         .catch(err => console.log(err));
     }
   },
