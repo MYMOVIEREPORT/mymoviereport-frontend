@@ -107,6 +107,7 @@ export default {
       modal.style.display = "none";
       modalBack.remove();
       body.classList.toggle("modal-open");
+      body.style.padding = 0;
     },
     createPost() {
       const reqUrl = process.env.VUE_APP_REQUEST_URL;
