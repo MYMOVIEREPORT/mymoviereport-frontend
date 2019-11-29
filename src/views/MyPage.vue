@@ -6,7 +6,7 @@
     </div>
     <!-- 추천 장르  -->
     <div class="container">
-      <h5>{{ user.username }}님이 선호하는 장르 추천영화</h5>
+      <h5 class="font-weight-bold">👍 {{ user.username }}님이 선호하는 장르 추천영화</h5>
       <hr />
     </div>
     <div class="mx-2">
@@ -15,7 +15,10 @@
     </div>
     <!-- 포스트 리스트 -->
     <div class="container">
-      <h5>유저가 쓴 포스트</h5>
+      <h5 class="d-flex align-items-center font-weight-bold">
+        <FilmIcon />
+        <span class="ml-2">나의 리포트</span>
+      </h5>
       <hr />
     </div>
     <div class="mx-2">
@@ -32,6 +35,7 @@ import UserPosts from "../components/User/UserPosts";
 import { mapGetters } from "vuex";
 import MovieList from "../components/Movie/MovieList";
 import Loading from "../components/Util/Loading";
+import FilmIcon from "../components/Icon/FilmIcon";
 
 export default {
   name: "MyPage",
@@ -39,7 +43,8 @@ export default {
     UserProfile,
     UserPosts,
     MovieList,
-    Loading
+    Loading,
+    FilmIcon
   },
   data() {
     return {

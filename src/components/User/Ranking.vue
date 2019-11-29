@@ -2,7 +2,7 @@
   <div>
     <h6 class="d-flex align-items-center justify-content-center">
       <PrizeIcon fill="#fdcb6e" />
-      <span class="ml-2">리포트 랭킹</span>
+      <span class="ml-2 font-weight-bold">리포트 랭킹</span>
     </h6>
     <hr class="dark-br" />
     <RankingList :rankers="rankers" />
