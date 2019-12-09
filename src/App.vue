@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <v-app>
     <!-- 네비 -->
     <NavBar />
 
@@ -12,7 +12,7 @@
     <footer class="footer">
       <div>© MY MOVIE REPORT - 띵한만다린, {{ new Date().getFullYear() }}</div>
     </footer>
-  </div>
+  </v-app>
 </template>
 
 <script>
