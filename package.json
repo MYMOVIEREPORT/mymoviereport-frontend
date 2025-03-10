@@ -10,7 +10,7 @@
 	"dependencies": {
 		"apexcharts": "^3.24.0",
 		"aws-sdk": "^2.1354.0",
-		"axios": "^1.7.4",
+		"axios": "^1.8.2",
 		"core-js": "^3.3.2",
 		"jwt-decode": "^2.2.0",
 		"vue": "^3.0.0",
